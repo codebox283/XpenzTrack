@@ -1,0 +1,100 @@
+.Home{
+    font-family: 'Poppins';
+}
+
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 200px;
+}
+
+.Logo{
+    line-height: 27px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.Logo h3{
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+.Buttons{
+    margin-top: 35px;
+}
+
+.Buttons button{
+    background-color: rgba(51, 102, 255, 1);
+    font-family: 'Poppins';
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 300;
+    width: 160px;
+    height: 60px;
+}
+
+.Buttons button:first-child{
+    color: black;
+    background-color: white;
+}
+
+.Buttons button:first-child:hover{
+    background-color: white;
+    text-shadow: 1px 1px 2px rgb(120, 120, 120);
+}
+
+.Buttons button:hover{
+    background-color: rgba(51, 102, 255, 0.9);
+}
+
+.Hero{
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 200px;
+    background-color: rgba(247, 245, 253, 1);
+}
+
+.HeroLeft{
+    width: 470px;
+    margin-top: -70px;
+    text-align: start;
+    color: #000000b1;
+}
+
+.HeroLeft h1{
+    font-size: 100px;
+    font-weight: 500;
+    line-height: 100px;
+}
+
+.HeroLeft button{
+    background-color: rgba(248, 213, 126, 1);
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 300;
+    width: 200px;
+    height: 80px;
+    margin-top: 50px;
+}
+
+.HeroLeft button:hover{
+    color: white;
+    background-color: rgba(157, 129, 44, 0.7);
+}
+
+.HeroRight{
+    width: 600px;
+    height: 600px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.HeroRight img{
+    height: 100%;
+}
