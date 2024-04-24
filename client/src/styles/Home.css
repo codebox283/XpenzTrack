@@ -2,6 +2,7 @@
     font-family: 'Poppins';
 }
 
+/* NAVBAR */
 .Navbar{
     display: flex;
     justify-content: space-between;
@@ -48,6 +49,8 @@
 .Buttons button:hover{
     background-color: rgba(51, 102, 255, 0.9);
 }
+
+/* HERO */
 
 .Hero{
     display: flex;
@@ -97,4 +100,90 @@
 
 .HeroRight img{
     height: 100%;
+}
+
+/* HERO */
+
+.Features{
+    display: flex;
+    padding: 100px 200px;
+    justify-content: space-between;
+}
+
+.Features div{
+    font-size: 16px;
+    width: 20%;
+}
+
+.Features div h2{
+    font-weight: 600;
+}
+
+.Features div p{
+    font-weight: 400;
+}
+
+
+/* Advert */
+
+.Advert{
+    height: 70vh;
+    background-color: rgba(242, 250, 248, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Advert h1{
+    font-size: 8vw;
+    color: rgb(132, 132, 132);
+    z-index: 2;
+}
+
+.Advert div{
+    width: 45vw;
+    height: 50vh;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    border-radius: 10px;
+    /* margin-top: -60vh; */
+    z-index: 1;
+}
+
+.Advert div img{
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Testimonials */
+
+.Testimonials{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(241, 236, 255, 1);
+}
+
+.Testimonials div{
+    padding: 4vw;
+}
+
+.TL img{
+    border-radius: 50%;
+}
+
+.TR{
+    width: 20%;
+    text-align: start;
+}
+
+.TR p:first-child{
+    font-weight: bold;
+}
+
+.TR p:last-child{
+    font-weight: 300;
 }
