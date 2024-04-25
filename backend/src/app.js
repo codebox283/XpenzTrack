@@ -10,13 +10,14 @@ app.use(cors(
         "origin": "*",
         "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
         "preflightContinue": false,
-        "optionsSuccessStatus": 204
+        "optionsSuccessStatus": 204,
+        credentials:true
     }
 ))
-app.use(cookieParser());
-app.use(express.static('public'))
+app.use(express.urlencoded({ extended: false, limit:"16kb" }))
 app.use(express.json({ limit: "16kb" }))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.static('public'))
+app.use(cookieParser());
 
 // import routes
 import userRoute from './routes/user.routes.js'

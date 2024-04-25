@@ -9,8 +9,7 @@ const userSchema = new Schema({
     },
     username: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     email: {
         type: String,
@@ -33,6 +32,9 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SavingsGoal'
     }],
+    refreshToken:{
+        type: String
+    }
 }, { timestamps: true })
 
 userSchema.pre('save', async function(next){
@@ -42,7 +44,7 @@ userSchema.pre('save', async function(next){
     next()
 })
 
-userSchema.methods.isPasswordCorrect = async (oldpass) => {
+userSchema.methods.isPasswordCorrect = async function(oldpass){
     return await bcrypt.compare(oldpass, this.password)
 }
 
@@ -65,7 +67,7 @@ userSchema.methods.generateAccessToken = async () => {
     }
 }
 
-userSchema.methods.generateRefreshToken = async () => {
+userSchema.methods.generateRefreshToken = async function() {
     try {
         return jwt.sign(
             {
