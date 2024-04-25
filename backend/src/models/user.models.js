@@ -46,4 +46,39 @@ userSchema.methods.isPasswordCorrect = async (oldpass) => {
     return await bcrypt.compare(oldpass, this.password)
 }
 
+userSchema.methods.generateAccessToken = async () => {
+    try {
+        return jwt.sign(
+            {
+                _id: this._id,
+                email: this.email,
+                username: this.username,
+                fullName: this.fullName
+            },
+            process.env.JWT_ACCESS_SECRET,
+            {
+                expiresIn: process.env.JWT_ACCESS_EXPIRY
+            }
+        )
+    } catch (error) {
+        console.log('error in generate access token: ', error)
+    }
+}
+
+userSchema.methods.generateRefreshToken = async () => {
+    try {
+        return jwt.sign(
+            {
+                _id: this._id,
+            },
+            process.env.JWT_REFRESH_SECRET,
+            {
+                expiresIn: process.env.JWT_REFRESH_EXPIRY
+            }
+        )
+    } catch (error) {
+        console.log('error in generate access token: ', error)
+    }
+}
+
 export const User = mongoose.model("User", userSchema)

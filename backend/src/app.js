@@ -18,6 +18,10 @@ app.use(express.static('public'))
 app.use(express.json({limit:"16kb"}))
 app.use(express.urlencoded({extended:false}))
 
-// app.use('/api/v1/user', userRoute)
+// import routes
+import userRoute from './routes/user.routes.js'
+
+// define routes
+app.use('/api/v1/user', userRoute)
 
 export { app };
