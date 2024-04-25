@@ -136,8 +136,9 @@
 }
 
 .Advert h1{
-    font-size: 8vw;
-    color: rgb(132, 132, 132);
+    width: 45vw;
+    font-size: 5vw;
+    color: rgba(255, 255, 255, 0.6);
     z-index: 2;
 }
 
@@ -148,7 +149,7 @@
     overflow: hidden;
     justify-content: center;
     border-radius: 10px;
-    /* margin-top: -60vh; */
+    margin-top: -55vh;
     z-index: 1;
 }
 

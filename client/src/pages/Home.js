@@ -51,7 +51,7 @@ const Home = () => {
       </div>
 
       <div className="Advert">
-        {/* <h1>ACHIEVE YOUR GOALS WITH XPENZ TRACK</h1> */}
+        <h1>ACHIEVE YOUR GOALS WITH XPENZ TRACK</h1>
         <div>
           <img src={Ad} alt=''></img>
         </div>
