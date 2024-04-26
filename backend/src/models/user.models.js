@@ -48,14 +48,13 @@ userSchema.methods.isPasswordCorrect = async function(oldpass){
     return await bcrypt.compare(oldpass, this.password)
 }
 
-userSchema.methods.generateAccessToken = async () => {
+userSchema.methods.generateAccessToken = async function () {
     try {
         return jwt.sign(
             {
                 _id: this._id,
                 email: this.email,
                 username: this.username,
-                fullName: this.fullName
             },
             process.env.JWT_ACCESS_SECRET,
             {
