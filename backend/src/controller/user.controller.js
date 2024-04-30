@@ -11,7 +11,7 @@ const generateAccessAndRefreshTokens = (async (userId) => {
         const accessToken = await user.generateAccessToken();
         const refreshToken = await user.generateRefreshToken();
 
-        console.log('accessToken', accessToken, 'refreshToken', refreshToken)
+        // console.log('accessToken', accessToken, 'refreshToken', refreshToken)
 
         user.refreshToken = refreshToken;
         await user.save({ validateBeforeSave: false })
@@ -106,8 +106,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
-            $set: {
-                refreshToken: undefined
+            $unset: {
+                refreshToken: 1
             }
         },
         {
@@ -128,7 +128,35 @@ const logoutUser = asyncHandler(async (req, res) => {
     )
 })
 
+const updateProfileDeatils = asyncHandler(async(req, res) => {
+    const {username, fullName} = req.body
+
+    if([username, fullName].some((value) => {value.trim() === ''}))
+    {
+        throw new ApiError(403, 'Invalid credentials for update')
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set: {
+                username: username.toLowerCase(),
+                fullName
+            }
+        },
+        {
+            new: true
+        }
+    ).select('-password -refreshToken')
+
+    return res.status(200)
+       .json(
+            new ApiResponse(200, user, "successfully updated")
+        )
+})
+
 export {
     registerUser, loginUser,
-    logoutUser
+    logoutUser,
+    updateProfileDeatils
 } 
