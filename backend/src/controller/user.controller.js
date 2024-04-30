@@ -271,8 +271,7 @@ const updateProfileDeatils = asyncHandler(async(req, res) => {
 // })
 
 export {
-    registerUser, loginUser,
-    logoutUser, updatePassword, forgotPassword,
+    registerUser, loginUser, updatePassword, forgotPassword,
     logoutUser,
     updateProfileDeatils,
     // getAllExpenseTrack
