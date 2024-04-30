@@ -225,10 +225,7 @@ const updateProfileDeatils = asyncHandler(async(req, res) => {
 
 export {
     registerUser, loginUser,
-<<<<<<< HEAD
-    logoutUser, updatePassword, forgotPassword
-=======
+    logoutUser, updatePassword, forgotPassword,
     logoutUser,
     updateProfileDeatils
->>>>>>> a60ba751295359e2db30502728437fd752533325
 } 
