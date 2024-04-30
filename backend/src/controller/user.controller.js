@@ -76,7 +76,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (!user) throw new ApiError(400, "email or usename does not exist")
 
-    const passwordValid = await user.isPasswordCorrect(password)
+    const passwordValid = await user.isLoggin(password)
     console.log(passwordValid);
     if (!passwordValid) throw new ApiError(400, "Password Invalid")
 
@@ -122,10 +122,78 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
 
     return res.status(200)
-    .clearCookie('accessToken', option)
-    .clearCookie('refreshToken', option)
-    .json(
-        new ApiResponse(200, user, "successfully logout")
+        .clearCookie('accessToken', option)
+        .clearCookie('refreshToken', option)
+        .json(
+            new ApiResponse(200, user, "successfully logout")
+        )
+})
+
+
+const updatePassword = asyncHandler(async (req, res) => {
+    // const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    // if (newPassword !== confirmPassword) throw new ApiError(401, 'Type same password! Please')
+
+    // const user = await User.findById(req.user?._id)
+    // if (!user) throw new ApiError(401, 'User not found')
+
+    // const oldPasswordIsCorrect = await user.isPasswordCorrect(oldPassword);
+    // console.log(oldPasswordIsCorrect)
+
+    // if (!oldPasswordIsCorrect) throw new ApiError(401, 'Old password is incorrect')
+
+    // user.password = newPassword;
+    // console.log(user.password)
+    // await user.save({ validateBeforeSave: true });
+
+    // return res.status(200).json(
+    //     new ApiResponse(200, user, "Password updated successfully")
+    // )
+
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({ error: 'Passwords do not match' });
+    }
+
+    try {
+        const user = await User.findById(req.user._id);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ error: 'Old password is incorrect' });
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        return res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        return next(error);
+    }
+})
+
+const forgotPassword = asyncHandler(async (req, res) => {
+    const { email, newPassword, confirmPassword } = req.body;
+
+    if (!email) throw new ApiError(401, 'Email not provided')
+    if (newPassword !== confirmPassword) throw new ApiError(401, 'Type same password! Please')
+
+    const user = await User.find({ email: email })
+    console.log(user)
+    if (!user) throw new ApiError(401, 'User not found')
+
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: true });
+
+    return res.status(200).json(
+        new ApiResponse(200, user, "Password updated successfully")
     )
 })
 
@@ -204,6 +272,7 @@ const updateProfileDeatils = asyncHandler(async(req, res) => {
 
 export {
     registerUser, loginUser,
+    logoutUser, updatePassword, forgotPassword,
     logoutUser,
     updateProfileDeatils,
     // getAllExpenseTrack

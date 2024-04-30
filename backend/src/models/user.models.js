@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
-import bcrypt from 'bcrypt'
+// now bcrypt is deprecated so now we use argon2 for hashing and comparison passwords
+// import bcrypt from 'bcrypt'
+import argon from 'argon2'
 import jwt from 'jsonwebtoken'
 
 const userSchema = new Schema({
@@ -32,20 +34,31 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SavingsGoal'
     }],
-    refreshToken:{
+    refreshToken: {
         type: String
     }
 }, { timestamps: true })
 
-userSchema.pre('save', async function(next){
-    if(!this.isModified('password')) return next()
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next()
 
-    this.password = await bcrypt.hash(this.password, 10);
+    //change bcrypt to argon2
+    this.password = await argon.hash(this.password, { saltLength: 10 });
     next()
 })
 
-userSchema.methods.isPasswordCorrect = async function(oldpass){
-    return await bcrypt.compare(oldpass, this.password)
+userSchema.methods.isLoggin = async function (oldpass) {
+    //change bcrypt to argon2
+    return await argon.verify(this.password, oldpass)
+}
+
+userSchema.methods.isPasswordCorrect = async function (oldpass) {
+    //change bcrypt to argon2
+    try {
+        return await argon.verify(this.password, oldpass)
+    } catch (error) {
+        console.log('error in isPasswordCorrect: ', error)
+    }
 }
 
 userSchema.methods.generateAccessToken = async function () {
@@ -66,7 +79,7 @@ userSchema.methods.generateAccessToken = async function () {
     }
 }
 
-userSchema.methods.generateRefreshToken = async function() {
+userSchema.methods.generateRefreshToken = async function () {
     try {
         return jwt.sign(
             {
