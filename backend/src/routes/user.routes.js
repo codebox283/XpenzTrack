@@ -9,5 +9,6 @@ router.route("/login").post(loginUser)
 
 router.route('/logout').get(verifyJWT, logoutUser)
 router.route('/update-details').patch(verifyJWT, updateProfileDeatils)
+// router.route('/get-expenses').get(verifyJWT, getAllExpenseTrack)
 
 export default router

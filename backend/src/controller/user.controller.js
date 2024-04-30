@@ -3,6 +3,7 @@ import { ApiResponse } from "../utils/apiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { User } from "../models/user.models.js"
 import jwt from 'jsonwebtoken'
+import mongoose from "mongoose"
 
 
 const generateAccessAndRefreshTokens = (async (userId) => {
@@ -155,8 +156,55 @@ const updateProfileDeatils = asyncHandler(async(req, res) => {
         )
 })
 
+// const getAllExpenseTrack = asyncHandler( async (req, res) => {
+//     try {
+//         // const user = await User.findById(req.user?._id).sort({ createdAt: -1 })
+
+//         const user = await User.aggregate([
+//             {
+//                 $match: {
+//                     _id: mongoose.Types.ObjectId.createFromHexString(req.user?._id)
+//                 }
+//             },
+//             {
+//                 $lookup: {
+//                     from: "expenses",
+//                     localField: "_id",
+//                     foreignField: "user",
+//                     as: "expensetracks"
+//                 }
+//             },
+//             {
+//                 $unwind: "$expensetracks"
+//             },
+//             {
+//                 $sort: {
+//                     "expensetracks.createdAt": -1
+//                 }
+//             },
+//             {
+//                 $group: {
+//                     _id: "$_id",
+//                     fullName: { $first: "$fullName" },
+//                     username: { $first: "$username" },
+//                     email: { $first: "$email" },
+//                     expensetracks: { $push: "$expensetracks" }
+//                 }
+//             },
+//         ])
+
+//         console.log(user)
+//         return res
+//         .status(200)
+//         .json(200, user, "get all expense tracks")
+//     } catch (error) {
+//         throw new ApiError(404, "error while getting all expense track")
+//     }
+// })
+
 export {
     registerUser, loginUser,
     logoutUser,
-    updateProfileDeatils
+    updateProfileDeatils,
+    // getAllExpenseTrack
 } 
