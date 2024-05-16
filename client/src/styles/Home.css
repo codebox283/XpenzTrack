@@ -24,7 +24,7 @@
     margin-top: 35px;
 }
 
-.NavbarButtons button{
+.btn1, .btn2{
     background-color: rgba(51, 102, 255, 1);
     font-family: 'Poppins';
     color: white;
@@ -36,17 +36,17 @@
     height: 60px;
 }
 
-.NavbarButtons button:first-child{
+.btn1{
     color: black;
     background-color: white;
 }
 
-.NavbarButtons button:first-child:hover{
+.btn1:hover{
     background-color: white;
     text-shadow: 1px 1px 2px rgb(120, 120, 120);
 }
 
-.NavbarButtons button:hover{
+.btn2:hover{
     background-color: rgba(51, 102, 255, 0.9);
 }
 
@@ -56,7 +56,7 @@
     display: flex;
     justify-content: space-between;
     padding: 100px 200px;
-    background-color: rgba(247, 245, 253, 1);
+    background-color: rgb(237, 233, 250);
 }
 
 .HeroLeft{
@@ -138,7 +138,7 @@
 .Advert h1{
     width: 45vw;
     font-size: 5vw;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 1);
     z-index: 2;
 }
 
@@ -156,6 +156,7 @@
 .Advert div img{
     width: 100%;
     object-fit: cover;
+    opacity: 0.7;
 }
 
 /* Testimonials */

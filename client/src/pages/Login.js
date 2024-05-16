@@ -1,24 +1,66 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import '../styles/Login.css';
 
 const Login = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+    const [error, setError] = useState('');
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('/api/user/login', formData); 
+            console.log(response.data); 
+            // Redirect user to dashboard or any other page upon successful login
+        } catch (error) {
+            setError('Invalid email or password. Please try again.');
+            console.error('Login failed:', error);
+        }
+    };
 
     return (
         <div className='auth'>
-
             <div className='container'>
-                <h2 className='header'>User Login</h2>
-                <p className='header-text'>Hey,Enter your details to get sing in to your account</p>
-                <form>
-                <input type='text' placeholder='Enter Email/Phone No'  className='user-fild'></input><br></br>
-                <input type='password' placeholder='Passcode' className='user-fild'></input><br></br>
-                <input type='submit' className='submit-button'></input>
+                <h2 className='header'>Welcome Back</h2>
+                <p className='header-text'>Hey, Enter your details to log in to your account</p>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type='text'
+                        name='email'
+                        placeholder='Email'
+                        className='user-field'
+                        value={formData.email}
+                        onChange={handleChange}
+                    /><br />
+                    <input
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        className='user-field'
+                        value={formData.password}
+                        onChange={handleChange}
+                    /><br />
+                    <input type='submit' value='Login' className='submit-button' />
                 </form>
-                <p className='text-1'>Forgot password?</p>
-                <p className='text-2'>Don't have an account? <a href='#..'>Request Now</a></p>
+                {error && <p className='error-message'>{error}</p>}
+                <p className='text-1'><Link to='/forgot-password'>Forgot password?</Link></p>
+                <p className='text-2'>Don't have an account? <Link to='/signup'>Register Now</Link></p>
             </div>
         </div>
-
     );
-}
+};
 
 export default Login;

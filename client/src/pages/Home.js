@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import Hero from '../assets/Hero.jpg';
 import Ad from '../assets/4.jpg';
@@ -15,15 +16,17 @@ const Home = () => {
           <h3>XPENZ<br></br>TRACK</h3>
         </div>
         <div className='NavbarButtons'>
-          <button>Sign Up</button>
-          <button>Log In</button>
+          <Link to='/signup'><button className='btn1'>Sign Up</button></Link>
+          <Link to='/login'><button className='btn2'>Log In</button></Link>
         </div>
       </div>
 
       <div className='Hero'>
         <div className='HeroLeft'>
           <h1>Empower Your Finances</h1>
-          <p>Revolutionize Your Financial Journey, Redefine Your Success with XpenZ!</p>
+          <p>Revolutionize Your Financial Journey, Redefine Your Success with 
+            {/* the best GenZ money managing platform  */}
+            <b> XPENZ</b>!</p>
           <button>Get Started</button>
         </div>
         <div className='HeroRight'>
@@ -51,7 +54,7 @@ const Home = () => {
       </div>
 
       <div className="Advert">
-        <h1>ACHIEVE YOUR GOALS WITH XPENZ TRACK</h1>
+        <h1>THE BEST GENZ EXPENSE TRACKING APP</h1>
         <div>
           <img src={Ad} alt=''></img>
         </div>

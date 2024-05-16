@@ -1,93 +1,88 @@
-import { ApiError } from "../utils/apiError.js"
-import { ApiResponse } from "../utils/apiResponse.js"
-import { asyncHandler } from "../utils/asyncHandler.js"
-import { User } from "../models/user.models.js"
-import jwt from 'jsonwebtoken'
-import mongoose from "mongoose"
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { User } from "../models/user.models.js";
+import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
 
-
-const generateAccessAndRefreshTokens = (async (userId) => {
+const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId);
         const accessToken = await user.generateAccessToken();
         const refreshToken = await user.generateRefreshToken();
 
-        // console.log('accessToken', accessToken, 'refreshToken', refreshToken)
-
         user.refreshToken = refreshToken;
-        await user.save({ validateBeforeSave: false })
+        await user.save({ validateBeforeSave: false });
 
         return { accessToken, refreshToken };
 
     } catch (error) {
-        throw new ApiError(401, "something went wrong while generating access and refresh Tokens")
+        throw new ApiError(401, "Something went wrong while generating access and refresh Tokens");
     }
-})
+};
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { fullName, username, email, password } = req.body
-    // console.log(fullName, username)
+    // alert("1"); 
+    const  
+    fullName = req.body.name,
+    email = req.body.email, 
+    phoneNumber = req.body.phoneNumber, 
+    password  = req.body.password;
 
-    if ([fullName, username, email, password].some((field) => {
-        field?.trim() === ""
-    })) {
-        throw new ApiError(404, "fill your credentials properly")
+    if ([fullName, email, phoneNumber, password].some((field) => field.trim() === "")) {
+        throw new ApiError(404, "Fill your credentials properly");
     }
 
-    const userdetail = await User.findOne({
-        $or: [
-            { email }, { username }
-        ]
-    })
+    const userDetail = await User.findOne({ $or: [{ email }, { phoneNumber }] });
 
-    if (userdetail) throw new ApiError(404, 'User is already exists')
+    if (userDetail) {
+        throw new ApiError(404, 'User already exists. Please Login!');
+    }
 
     const user = await User.create({
         fullName,
-        username: username.toLowerCase(),
         email,
-        password,
-    })
+        phoneNumber,
+        password
+    });
 
-    if (!user) throw new ApiError(404, 'please register again user not created......!')
+    if (!user) {
+        throw new ApiError(404, 'Please register again. User not created.');
+    }
 
     const createdUser = await User.findById(user._id).select('-password -refreshToken');
 
     return res
         .status(200)
-        .json(new ApiResponse(200, createdUser, 'user register successfully.....'))
-
-})
+        .json(new ApiResponse(200, createdUser, 'User registered successfully'));
+});
 
 const loginUser = asyncHandler(async (req, res) => {
-    // console.log(req.body)
-    const { username, email, password } = req.body;
-    // console.log(username, email);
+    const { email, password } = req.body;
 
-    if (!username || !email) throw new ApiError(401, 'Username or email Invalid')
+    if (!email) {
+        throw new ApiError(401, 'Email not provided');
+    }
 
-    const user = await User.findOne(
-        {
-            $or: [{ email }, { username }]  // search by both fields
-        }
-    )
+    const user = await User.findOne({ email });
 
-    // console.log(user)
+    if (!user) {
+        throw new ApiError(400, "User with this email does not exist");
+    }
 
-    if (!user) throw new ApiError(400, "email or usename does not exist")
+    const passwordValid = await user.isLoggin(password);
 
-    const passwordValid = await user.isLoggin(password)
-    console.log(passwordValid);
-    if (!passwordValid) throw new ApiError(400, "Password Invalid")
-
+    if (!passwordValid) {
+        throw new ApiError(400, "Password Invalid");
+    }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
 
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
     const option = {
         httpOnly: true,
         secure: true
-    }
+    };
 
     return res.status(200)
         .cookie("accessToken", accessToken, option)
@@ -95,62 +90,33 @@ const loginUser = asyncHandler(async (req, res) => {
         .json(
             new ApiResponse(
                 200,
-                {
-                    user: loggedInUser, accessToken, refreshToken
-                },
+                { user: loggedInUser, accessToken, refreshToken },
                 "Logged In successfully"
             )
-        )
-})
+        );
+});
 
 const logoutUser = asyncHandler(async (req, res) => {
     const user = await User.findByIdAndUpdate(
         req.user?._id,
-        {
-            $unset: {
-                refreshToken: 1
-            }
-        },
-        {
-            new: true
-        }
-    ).select('-password')
+        { $unset: { refreshToken: 1 } },
+        { new: true }
+    ).select('-password');
 
     const option = {
         httpOnly: true,
         secure: true,
-    }
+    };
 
     return res.status(200)
         .clearCookie('accessToken', option)
         .clearCookie('refreshToken', option)
         .json(
-            new ApiResponse(200, user, "successfully logout")
-        )
-})
-
+            new ApiResponse(200, user, "Successfully logged out")
+        );
+});
 
 const updatePassword = asyncHandler(async (req, res) => {
-    // const { oldPassword, newPassword, confirmPassword } = req.body;
-
-    // if (newPassword !== confirmPassword) throw new ApiError(401, 'Type same password! Please')
-
-    // const user = await User.findById(req.user?._id)
-    // if (!user) throw new ApiError(401, 'User not found')
-
-    // const oldPasswordIsCorrect = await user.isPasswordCorrect(oldPassword);
-    // console.log(oldPasswordIsCorrect)
-
-    // if (!oldPasswordIsCorrect) throw new ApiError(401, 'Old password is incorrect')
-
-    // user.password = newPassword;
-    // console.log(user.password)
-    // await user.save({ validateBeforeSave: true });
-
-    // return res.status(200).json(
-    //     new ApiResponse(200, user, "Password updated successfully")
-    // )
-
     const { oldPassword, newPassword, confirmPassword } = req.body;
 
     if (newPassword !== confirmPassword) {
@@ -177,102 +143,54 @@ const updatePassword = asyncHandler(async (req, res) => {
     } catch (error) {
         return next(error);
     }
-})
+});
 
 const forgotPassword = asyncHandler(async (req, res) => {
     const { email, newPassword, confirmPassword } = req.body;
 
-    if (!email) throw new ApiError(401, 'Email not provided')
-    if (newPassword !== confirmPassword) throw new ApiError(401, 'Type same password! Please')
+    if (!email) {
+        throw new ApiError(401, 'Email not provided');
+    }
+    if (newPassword !== confirmPassword) {
+        throw new ApiError(401, 'Passwords do not match');
+    }
 
-    const user = await User.find({ email: email })
-    console.log(user)
-    if (!user) throw new ApiError(401, 'User not found')
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new ApiError(401, 'User not found');
+    }
 
     user.password = newPassword;
-    await user.save({ validateBeforeSave: true });
+    await user.save();
 
     return res.status(200).json(
         new ApiResponse(200, user, "Password updated successfully")
-    )
-})
+    );
+});
 
-const updateProfileDeatils = asyncHandler(async(req, res) => {
-    const {username, fullName} = req.body
+const updateProfileDetails = asyncHandler(async (req, res) => {
+    const { fullName, phoneNumber } = req.body;
 
-    if([username, fullName].some((value) => {value.trim() === ''}))
-    {
-        throw new ApiError(403, 'Invalid credentials for update')
+    if ([fullName, phoneNumber].some((value) => value.trim() === '')) {
+        throw new ApiError(403, 'Invalid credentials for update');
     }
 
     const user = await User.findByIdAndUpdate(
         req.user?._id,
-        {
-            $set: {
-                username: username.toLowerCase(),
-                fullName
-            }
-        },
-        {
-            new: true
-        }
-    ).select('-password -refreshToken')
+        { $set: { fullName, phoneNumber } },
+        { new: true }
+    ).select('-password -refreshToken');
 
     return res.status(200)
-       .json(
-            new ApiResponse(200, user, "successfully updated")
-        )
-})
-
-// const getAllExpenseTrack = asyncHandler( async (req, res) => {
-//     try {
-//         // const user = await User.findById(req.user?._id).sort({ createdAt: -1 })
-
-//         const user = await User.aggregate([
-//             {
-//                 $match: {
-//                     _id: mongoose.Types.ObjectId.createFromHexString(req.user?._id)
-//                 }
-//             },
-//             {
-//                 $lookup: {
-//                     from: "expenses",
-//                     localField: "_id",
-//                     foreignField: "user",
-//                     as: "expensetracks"
-//                 }
-//             },
-//             {
-//                 $unwind: "$expensetracks"
-//             },
-//             {
-//                 $sort: {
-//                     "expensetracks.createdAt": -1
-//                 }
-//             },
-//             {
-//                 $group: {
-//                     _id: "$_id",
-//                     fullName: { $first: "$fullName" },
-//                     username: { $first: "$username" },
-//                     email: { $first: "$email" },
-//                     expensetracks: { $push: "$expensetracks" }
-//                 }
-//             },
-//         ])
-
-//         console.log(user)
-//         return res
-//         .status(200)
-//         .json(200, user, "get all expense tracks")
-//     } catch (error) {
-//         throw new ApiError(404, "error while getting all expense track")
-//     }
-// })
+        .json(new ApiResponse(200, user, "Successfully updated"));
+});
 
 export {
-    registerUser, loginUser, updatePassword, forgotPassword,
+    registerUser,
+    loginUser,
+    updatePassword,
+    forgotPassword,
     logoutUser,
-    updateProfileDeatils,
-    // getAllExpenseTrack
-} 
+    updateProfileDetails
+};
