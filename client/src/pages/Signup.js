@@ -40,6 +40,13 @@ const Signup = () => {
         try {
             const response = await axios.post('http://localhost:4000/api/user/signup', formData);
             console.log(response.data);
+            // Handle the response data here
+            if (response.status === 200) {
+                console.log('User registered successfully');
+            } else {
+                setError(response.data.message || 'Failed to register. Please try again.');
+                console.error('Signup failed:', response.data.error);
+            }
             // Redirect user to dashboard or any other page upon successful signup
         } catch (error) {
             setError('Failed to register. Please try again.');
@@ -47,8 +54,6 @@ const Signup = () => {
         }
     };
     
-    
-
     return (
         <div className='auth'>
             <div className='container'>
