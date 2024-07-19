@@ -22,38 +22,38 @@ const generateAccessAndRefreshTokens = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-    const  
-    fullName = req.body.name,
-    email = req.body.email, 
-    phoneNumber = req.body.phoneNumber, 
-    password  = req.body.password;
+    const { fullName, username, email, password, phoneNumber } = req.body
+    // console.log(fullName, username)
 
-    if ([fullName, email, phoneNumber, password].some((field) => field.trim() === "")) {
-        throw new ApiError(404, "Fill your credentials properly");
+    if ([fullName, username, email, password, phoneNumber].some((field) => {
+        field?.trim() === ""
+    })) {
+        throw new ApiError(404, "fill your credentials properly")
     }
 
-    const userDetail = await User.findOne({ $or: [{ email }, { phoneNumber }] });
+    const userdetail = await User.findOne({
+        $or: [
+            { email }, { username }
+        ]
+    })
 
-    if (userDetail) {
-        throw new ApiError(404, 'User already exists. Please Login!');
-    }
+    if (userdetail) throw new ApiError(404, 'User is already exists')
 
     const user = await User.create({
         fullName,
+        username: username.toLowerCase(),
         email,
-        phoneNumber,
-        password
-    });
+        password,
+        phoneNumber
+    })
 
-    if (!user) {
-        throw new ApiError(404, 'Please register again. User not created.');
-    }
+    if (!user) throw new ApiError(404, 'please register again user not created......!')
 
     const createdUser = await User.findById(user._id).select('-password -refreshToken');
 
     return res
         .status(200)
-        .json(new ApiResponse(200, createdUser, 'User registered successfully'));
+        .json(new ApiResponse(200, createdUser, 'user register successfully.....'))
 });
 
 const loginUser = asyncHandler(async (req, res) => {
