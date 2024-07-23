@@ -1,0 +1,141 @@
+[
+    {
+        "_id": "60d1e9c8c2d1c15d4c4ebbd1",
+        "fullName": "John Doe",
+        "username": "johndoe",
+        "email": "johndoe@example.com",
+        "phoneNumber": 1234567890,
+        "password": "$argon2id$v=19$m=4096,t=3,p=1$...$...",
+        "refreshToken": null,
+        "categories": [
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd2",
+                "name": "Food",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd3",
+                "name": "Utilities",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd4",
+                "name": "Entertainment",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd5",
+                "name": "Unknown",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            }
+        ],
+        "expenses": [
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd4",
+                "amount": 50,
+                "description": "Groceries",
+                "category": "60d1e9c8c2d1c15d4c4ebbd2",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd5",
+                "amount": 100,
+                "description": "Electricity Bill",
+                "category": "60d1e9c8c2d1c15d4c4ebbd3",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd8",
+                "amount": 20,
+                "description": "Lunch",
+                "category": "60d1e9c8c2d1c15d4c4ebbd2",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-20T12:00:00.000Z",
+                "updatedAt": "2023-07-20T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd9",
+                "amount": 60,
+                "description": "Dinner",
+                "category": "60d1e9c8c2d1c15d4c4ebbd2",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-21T12:00:00.000Z",
+                "updatedAt": "2023-07-21T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbda",
+                "amount": 80,
+                "description": "Shopping",
+                "category": "60d1e9c8c2d1c15d4c4ebbd4",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-22T12:00:00.000Z",
+                "updatedAt": "2023-07-22T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbdb",
+                "amount": 40,
+                "description": "Taxi",
+                "category": "60d1e9c8c2d1c15d4c4ebbd3",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-23T12:00:00.000Z",
+                "updatedAt": "2023-07-23T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbdc",
+                "amount": 30,
+                "description": "Movies",
+                "category": "60d1e9c8c2d1c15d4c4ebbd5",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-24T12:00:00.000Z",
+                "updatedAt": "2023-07-24T12:00:00.000Z",
+                "__v": 0
+            }
+        ],
+        "savingsGoals": [
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd6",
+                "name": "Vacation Fund",
+                "targetAmount": 1000,
+                "currentBalance": 200,
+                "targetDate": "2023-12-31T00:00:00.000Z",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            },
+            {
+                "_id": "60d1e9c8c2d1c15d4c4ebbd7",
+                "name": "Emergency Fund",
+                "targetAmount": 500,
+                "currentBalance": 100,
+                "targetDate": "2023-12-31T00:00:00.000Z",
+                "user": "60d1e9c8c2d1c15d4c4ebbd1",
+                "createdAt": "2023-07-18T12:00:00.000Z",
+                "updatedAt": "2023-07-18T12:00:00.000Z",
+                "__v": 0
+            }
+        ]
+    }
+]
