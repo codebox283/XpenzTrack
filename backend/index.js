@@ -40,7 +40,7 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 // Routes
-app.use('/api/user', userRoute);
+app.use('/api/v1/user', userRoute);
 
 
 export { app };
