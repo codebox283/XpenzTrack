@@ -83,7 +83,7 @@ const loginUser = asyncHandler(async (req, res) => {
         secure: true
     };
 
-    console.log(loggedInUser);
+    console.log("Login Details:", loggedInUser);
     console.log(loggedInUser._id.toHexString());
 
     return res.status(200)
@@ -191,62 +191,75 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
 
 
 const getUsersWithDetails = asyncHandler(async (req, res) => {
-    const getUserDetails = User.aggregate([
-        {
-            $match: {
-                _id: mongoose.Types.ObjectId(req.user._id)
+    const userId = new mongoose.Types.ObjectId(req.cookies?.ID)
+    console.log("getUsersWithDetails: ",userId);
+    if (!userId) {
+        return res.status(400).json(new ApiResponse(400, null, "Invalid user ID"));
+    }
+    try {
+        const getUserDetails = await User.aggregate([
+            {
+                $match: {
+                    _id: userId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'categories', // The name of the Category collection
+                    localField: '_id', // Field from the User collection
+                    foreignField: 'user', // Field from the Category collection
+                    as: 'userCategories' // Output array field for categories
+                }
+            },
+            {
+                $unwind: {
+                    path: '$userCategories',
+                    preserveNullAndEmptyArrays: true // To keep users even if they have no categories
+                }
+            },
+            {
+                $lookup: {
+                    from: 'expenses', // The name of the Expense collection
+                    localField: '_id', // Field from the User collection
+                    foreignField: 'user', // Field from the Expense collection
+                    as: 'userExpenses' // Output array field for expenses
+                }
+            },
+            {
+                $unwind: {
+                    path: '$userExpenses',
+                    preserveNullAndEmptyArrays: true // To keep users even if they have no expenses
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    fullName: { $first: '$fullName' },
+                    username: { $first: '$username' },
+                    email: { $first: '$email' },
+                    phoneNumber: { $first: '$phoneNumber' },
+                    password: { $first: '$password' },
+                    refreshToken: { $first: '$refreshToken' },
+                    categories: { $push: '$userCategories' },
+                    expenses: { $push: '$userExpenses' }
+                }
             }
-        },
-        {
-            $lookup: {
-                from: 'categories', // The name of the Category collection
-                localField: '_id', // Field from the User collection
-                foreignField: 'user', // Field from the Category collection
-                as: 'userCategories' // Output array field for categories
-            }
-        },
-        {
-            $unwind: {
-                path: '$userCategories',
-                preserveNullAndEmptyArrays: true // To keep users even if they have no categories
-            }
-        },
-        {
-            $lookup: {
-                from: 'expenses', // The name of the Expense collection
-                localField: '_id', // Field from the User collection
-                foreignField: 'user', // Field from the Expense collection
-                as: 'userExpenses' // Output array field for expenses
-            }
-        },
-        {
-            $unwind: {
-                path: '$userExpenses',
-                preserveNullAndEmptyArrays: true // To keep users even if they have no expenses
-            }
-        },
-        {
-            $group: {
-                _id: '$_id',
-                fullName: { $first: '$fullName' },
-                username: { $first: '$username' },
-                email: { $first: '$email' },
-                phoneNumber: { $first: '$phoneNumber' },
-                password: { $first: '$password' },
-                refreshToken: { $first: '$refreshToken' },
-                categories: { $push: '$userCategories' },
-                expenses: { $push: '$userExpenses' }
-            }
+        ])
+        if (getUserDetails.length === 0) {
+            return res.status(404).json(new ApiResponse(404, null, "User not found"));
         }
-    ])
-    return res.status(200)
-    .json(
-        new ApiResponse(
-            200,
-            getUserDetails,
-            "Successfully fetched user details with associated categories and expenses"
-        )
-    )
+        return res.status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    getUserDetails[0],
+                    "Successfully fetched user details with associated categories and expenses"
+                )
+            )
+    } catch (error) {
+        return res.status(500).json(new ApiResponse(500, null, "An error occurred while fetching user details"));
+
+    }
 });
 
 export {
