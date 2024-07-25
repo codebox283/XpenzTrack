@@ -185,11 +185,72 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, user, "Successfully updated"));
 });
 
+
+const getUsersWithDetails = asyncHandler(async (req, res) => {
+    const getUserDetails = User.aggregate([
+        {
+            $match: {
+                _id: mongoose.Types.ObjectId(req.user._id)
+            }
+        },
+        {
+            $lookup: {
+                from: 'categories', // The name of the Category collection
+                localField: '_id', // Field from the User collection
+                foreignField: 'user', // Field from the Category collection
+                as: 'userCategories' // Output array field for categories
+            }
+        },
+        {
+            $unwind: {
+                path: '$userCategories',
+                preserveNullAndEmptyArrays: true // To keep users even if they have no categories
+            }
+        },
+        {
+            $lookup: {
+                from: 'expenses', // The name of the Expense collection
+                localField: '_id', // Field from the User collection
+                foreignField: 'user', // Field from the Expense collection
+                as: 'userExpenses' // Output array field for expenses
+            }
+        },
+        {
+            $unwind: {
+                path: '$userExpenses',
+                preserveNullAndEmptyArrays: true // To keep users even if they have no expenses
+            }
+        },
+        {
+            $group: {
+                _id: '$_id',
+                fullName: { $first: '$fullName' },
+                username: { $first: '$username' },
+                email: { $first: '$email' },
+                phoneNumber: { $first: '$phoneNumber' },
+                password: { $first: '$password' },
+                refreshToken: { $first: '$refreshToken' },
+                categories: { $push: '$userCategories' },
+                expenses: { $push: '$userExpenses' }
+            }
+        }
+    ])
+    return res.status(200)
+    .json(
+        new ApiResponse(
+            200,
+            getUserDetails,
+            "Successfully fetched user details with associated categories and expenses"
+        )
+    )
+});
+
 export {
     registerUser,
     loginUser,
     updatePassword,
     forgotPassword,
     logoutUser,
-    updateProfileDetails
+    updateProfileDetails,
+    getUsersWithDetails,
 };

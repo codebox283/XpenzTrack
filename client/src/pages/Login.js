@@ -22,8 +22,8 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api/v1/user/login', formData); 
-            console.log(response.data); 
+            const response = await axios.post('/api/v1/user/login', formData);
+            console.log(response.data);
             // Redirect user to dashboard or any other page upon successful login
         } catch (error) {
             setError('Invalid email or password. Please try again.');
