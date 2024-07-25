@@ -83,12 +83,13 @@ const loginUser = asyncHandler(async (req, res) => {
         secure: true
     };
 
-    console.log(loggedInUser.fullName);
+    console.log(loggedInUser);
+    console.log(loggedInUser._id.toHexString());
 
     return res.status(200)
         .cookie("accessToken", accessToken, option)
         .cookie("refreshToken", refreshToken, option)
-        .cookie('fullName', loggedInUser.fullName, option)
+        .cookie('ID', loggedInUser._id.toHexString(), option)
         .json(
             new ApiResponse(
                 200,

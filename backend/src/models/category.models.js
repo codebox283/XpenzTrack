@@ -3,7 +3,8 @@ import mongoose, { Schema } from "mongoose";
 const catergorySchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        enum: ["Food", "Utilities", "Entertainment", "Miscellaneous", "Transportation"]
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

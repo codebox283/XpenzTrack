@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { connectDB } from './src/db/index.js';
 import userRoute from './src/routes/user.routes.js';
+import categoryRoute from './src/routes/category.routes.js'
 
 dotenv.config({
     path: "./src/.env"
@@ -41,6 +42,6 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/v1/user', userRoute);
-
+app.use('/api/v1/category', categoryRoute);
 
 export { app };
