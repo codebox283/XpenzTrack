@@ -11,11 +11,6 @@ const setCategory = asyncHandler(async (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.cookies?.ID)
     if (!userId) throw new ApiError(400, "User id is not valid")
 
-    const user = await User.findById(userId)
-    if (!user) throw new ApiError(404, "User not found")
-
-    // console.log("Check user is valid or not: ", user);
-
     const categoryArray = ["Food", "Utilities", "Entertainment", "Transportation", "Miscellaneous"]
 
     const { amount, name, description } = req.body
@@ -44,9 +39,15 @@ const setCategory = asyncHandler(async (req, res) => {
     const exp = await expense.save()
     // console.log("Expense check: ", exp);
 
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { $push: { categories: cate._id, expenses: exp._id } },
+        { new: true }
+    )
+
     return res.status(201)
     .json(
-        new ApiResponse(201, exp, "data saved successfully")
+        new ApiResponse(201, user, "data saved successfully")
     )
 })
 
