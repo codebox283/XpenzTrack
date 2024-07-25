@@ -252,7 +252,7 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
             .json(
                 new ApiResponse(
                     200,
-                    getUserDetails[0],
+                    getUserDetails,
                     "Successfully fetched user details with associated categories and expenses"
                 )
             )
