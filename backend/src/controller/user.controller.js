@@ -191,74 +191,67 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
 
 
 const getUsersWithDetails = asyncHandler(async (req, res) => {
-    const userId = new mongoose.Types.ObjectId(req.cookies?.ID)
-    console.log("getUsersWithDetails: ",userId);
+    const userId = req.cookies?.ID ? new mongoose.Types.ObjectId(req.cookies.ID) : null;
+
+    console.log("getUsersWithDetails: ", userId);
     if (!userId) {
         return res.status(400).json(new ApiResponse(400, null, "Invalid user ID"));
     }
+
     try {
         const getUserDetails = await User.aggregate([
+            { $match: { _id: userId } },
             {
-                $match: {
-                    _id: userId
+                $lookup: {
+                    from: 'categories',
+                    localField: '_id',
+                    foreignField: 'user',
+                    as: 'userCategories'
                 }
             },
             {
                 $lookup: {
-                    from: 'categories', // The name of the Category collection
-                    localField: '_id', // Field from the User collection
-                    foreignField: 'user', // Field from the Category collection
-                    as: 'userCategories' // Output array field for categories
+                    from: 'expenses',
+                    localField: '_id',
+                    foreignField: 'user',
+                    as: 'userExpenses'
                 }
             },
             {
-                $unwind: {
-                    path: '$userCategories',
-                    preserveNullAndEmptyArrays: true // To keep users even if they have no categories
+                $addFields: {
+                    categories: '$userCategories',
+                    expenses: '$userExpenses'
                 }
             },
             {
-                $lookup: {
-                    from: 'expenses', // The name of the Expense collection
-                    localField: '_id', // Field from the User collection
-                    foreignField: 'user', // Field from the Expense collection
-                    as: 'userExpenses' // Output array field for expenses
-                }
-            },
-            {
-                $unwind: {
-                    path: '$userExpenses',
-                    preserveNullAndEmptyArrays: true // To keep users even if they have no expenses
-                }
-            },
-            {
-                $group: {
-                    _id: '$_id',
-                    fullName: { $first: '$fullName' },
-                    username: { $first: '$username' },
-                    email: { $first: '$email' },
-                    phoneNumber: { $first: '$phoneNumber' },
-                    password: { $first: '$password' },
-                    refreshToken: { $first: '$refreshToken' },
-                    categories: { $push: '$userCategories' },
-                    expenses: { $push: '$userExpenses' }
+                $project: {
+                    _id: 1,
+                    fullName: 1,
+                    username: 1,
+                    email: 1,
+                    phoneNumber: 1,
+                    password: 1,
+                    refreshToken: 1,
+                    categories: 1,
+                    expenses: 1
                 }
             }
-        ])
+        ]);
+
         if (getUserDetails.length === 0) {
             return res.status(404).json(new ApiResponse(404, null, "User not found"));
         }
-        return res.status(200)
-            .json(
-                new ApiResponse(
-                    200,
-                    getUserDetails,
-                    "Successfully fetched user details with associated categories and expenses"
-                )
-            )
-    } catch (error) {
-        return res.status(500).json(new ApiResponse(500, null, "An error occurred while fetching user details"));
 
+        return res.status(200).json(
+            new ApiResponse(
+                200,
+                getUserDetails[0], // Return the first item as getUserDetails is an array
+                "Successfully fetched user details with associated categories and expenses"
+            )
+        );
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+        return res.status(500).json(new ApiResponse(500, null, "An error occurred while fetching user details"));
     }
 });
 
