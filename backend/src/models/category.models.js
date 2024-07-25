@@ -4,7 +4,7 @@ const catergorySchema = new Schema({
     name: {
         type: String,
         required: true,
-        enum: ["Food", "Utilities", "Entertainment", "Miscellaneous", "Transportation"]
+        enum: ["Food", "Utilities", "Entertainment", "Transportation", "Miscellaneous"]
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
