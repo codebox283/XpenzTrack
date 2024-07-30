@@ -86,8 +86,6 @@ const Expenses = () => {
             <p>Loading expenses...</p>
           )}
         </SimpleBar>
-<<<<<<< HEAD
-=======
         {selectedExpense && (
           <ExpenseDetailModal
             expense={selectedExpense}
@@ -96,7 +94,6 @@ const Expenses = () => {
             onRequestClose={handleCloseModal}
           />
         )}
->>>>>>> 9b3222af0261040cbb625edcb3fd834492d0f80d
       </div>
 
       <RightPanel/>
