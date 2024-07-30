@@ -21,6 +21,7 @@
 
 .header {
     font-size: 30px;
+    font-weight: 500;
     justify-self: flex-start;
 }
 

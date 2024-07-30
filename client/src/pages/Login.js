@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/Login.css';
@@ -10,6 +10,7 @@ const Login = () => {
         password: ''
     });
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -24,6 +25,7 @@ const Login = () => {
         try {
             const response = await axios.post('/api/v1/user/login', formData);
             console.log(response.data);
+            navigate('/dashboard');
             // Redirect user to dashboard or any other page upon successful login
         } catch (error) {
             setError('Invalid email or password. Please try again.');

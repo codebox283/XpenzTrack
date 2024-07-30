@@ -6,7 +6,7 @@ import SimpleBar from 'simplebar-react';
 import Img from '../assets/man1.jpg';
 import RightPanel from '../components/RightPanel';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import GoalDetailModal from '../components/GoalDetailModal.js';
@@ -57,7 +57,7 @@ const Goals = () => {
           <p>Loading user info...</p>
         )}
         <ul>
-          <li>Dashboard</li>
+          <Link className='Link' to="/dashboard"><li>Dashboard</li></Link>
           <Link className='Link' to="/expenses"><li>Expenses</li></Link>
           <li id='this'>Goals</li>
           <li>Summary</li>
@@ -67,7 +67,7 @@ const Goals = () => {
       </div>
 
       <div className='Goals'>
-        <h1>Goals</h1>
+        <h1 className='heading'>Goals</h1>
         <p id='tag'>All your goals in one place</p>
 
         <SimpleBar className='DailyExpenses'>

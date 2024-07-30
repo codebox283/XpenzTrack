@@ -45,7 +45,7 @@ const Expenses = () => {
           <p>Loading user info...</p>
         )}
         <ul>
-          <li>Dashboard</li>
+          <Link className='Link' to="/dashboard"><li>Dashboard</li></Link>
           <li id='this'>Expenses</li>
           <li>Goals</li>
           <li>Summary</li>
@@ -55,7 +55,7 @@ const Expenses = () => {
       </div>
 
       <div className='Expenses'>
-        <h1>Expenses</h1>
+        <h1 className='heading'>Expenses</h1>
         <p id='tag'>Last 7 days data</p>
         <SimpleBar className='DailyExpenses'>
           {Object.keys(expensesByDate).length > 0 ? (
@@ -86,6 +86,17 @@ const Expenses = () => {
             <p>Loading expenses...</p>
           )}
         </SimpleBar>
+<<<<<<< HEAD
+=======
+        {selectedExpense && (
+          <ExpenseDetailModal
+            expense={selectedExpense}
+            data={data} // Pass the data prop here
+            isOpen={modalIsOpen}
+            onRequestClose={handleCloseModal}
+          />
+        )}
+>>>>>>> 9b3222af0261040cbb625edcb3fd834492d0f80d
       </div>
 
       <RightPanel/>
