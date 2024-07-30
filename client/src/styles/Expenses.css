@@ -54,6 +54,11 @@
     transition: ease 1s;
 }
 
+.Link {
+    color: #000;
+    text-decoration: none;
+} 
+
 .Navigation ul li:hover {
     opacity: 0.7;
 }
@@ -97,7 +102,6 @@
     scrollbar-width: 0px;
 }
 
-  
 
 #date{
     font-size: 18px;
@@ -122,7 +126,7 @@
     height: 80px;
     flex-wrap: wrap;font-weight: bold;
     padding-inline: 20px;
-    
+    cursor: pointer;
 }
 
 .category {

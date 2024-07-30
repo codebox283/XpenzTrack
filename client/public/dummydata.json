@@ -118,7 +118,7 @@
                 "_id": "60d1e9c8c2d1c15d4c4ebbd6",
                 "name": "Vacation Fund",
                 "targetAmount": 1000,
-                "currentBalance": 200,
+                "currentBalance": 600,
                 "targetDate": "2023-12-31T00:00:00.000Z",
                 "user": "60d1e9c8c2d1c15d4c4ebbd1",
                 "createdAt": "2023-07-18T12:00:00.000Z",
