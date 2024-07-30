@@ -7,6 +7,7 @@ import Signup from './pages/Signup.js';
 // import Dashboard from './pages/Dashboard.js';
 import Expenses from './pages/Expenses.js';
 import Goals from './pages/Goals.js';
+import Dashboard from './pages/Dashboard.js';
 
 
 Modal.setAppElement('#root');
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path="/expenses" element={<Expenses/>} />
                 <Route path='/goals' element={<Goals />} />
             </Routes>

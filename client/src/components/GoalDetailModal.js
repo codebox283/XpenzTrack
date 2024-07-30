@@ -1,6 +1,7 @@
 // GoalDetailModal.js
 import React from 'react';
 import Modal from 'react-modal';
+import CrossImg from '../assets/remove.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -20,11 +21,12 @@ const GoalDetailModal = ({ isOpen, onRequestClose, goal }) => {
             overlayClassName="Overlay"
 
         >
+            <img id='GoalModalButton' src={CrossImg} alt='' onClick={onRequestClose}></img>
             <h2 id='GoalDetailHeading'>{goal.name}</h2>
             <p className='GoalDetails'>Amount Saved: ${goal.currentBalance}</p>
             <p className='GoalDetails'>Target Amount: ${goal.targetAmount}</p>
             <p className='GoalDetails'>Target Date: {new Date(goal.targetDate).toLocaleDateString()}</p>
-            <button id='GoalModalButton' onClick={onRequestClose}>Close</button>
+            {/* <button id='GoalModalButton' onClick={onRequestClose}>Close</button> */}
             <div id='GoalModalProgress'>
                 <CircularProgressbar
                     value={percentage}

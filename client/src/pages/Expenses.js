@@ -69,7 +69,7 @@ const Expenses = () => {
           <p>Loading user info...</p>
         )}
         <ul>
-          <li>Dashboard</li>
+          <Link className='Link' to="/dashboard"><li>Dashboard</li></Link>
           <li id='this'>Expenses</li>
           <Link className='Link' to="/goals"><li>Goals</li></Link>
           <li>Summary</li>
@@ -79,7 +79,7 @@ const Expenses = () => {
       </div>
 
       <div className='Expenses'>
-        <h1>Expenses</h1>
+        <h1 className='heading'>Expenses</h1>
         <p id='tag'>Last 7 days data</p>
         <SimpleBar className='DailyExpenses'>
           {Object.keys(expensesByDate).length > 0 ? (
@@ -109,6 +109,7 @@ const Expenses = () => {
         {selectedExpense && (
           <ExpenseDetailModal
             expense={selectedExpense}
+            data={data} // Pass the data prop here
             isOpen={modalIsOpen}
             onRequestClose={handleCloseModal}
           />

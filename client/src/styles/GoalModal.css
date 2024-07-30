@@ -10,6 +10,7 @@
     width: 600px;
     height: 300px;
     padding: 30px ;
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -39,16 +40,10 @@
 }
 
 #GoalModalButton{
-    width: 100px;
-    height: 40px;
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-weight: 500;
-    opacity: 0.6;
-    border: none;
-    background-color: white;
-    color: red;
-    margin-top: 20px;
+    width: 20px;
+    position: absolute;
+    right: 40px;
+    top: 40px;
 }
 
 #GoalModalButton:hover{

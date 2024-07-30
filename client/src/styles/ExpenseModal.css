@@ -4,12 +4,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    padding: 20px;
     border-radius: 10px;
     outline: none;
     width: 600px;
     height: 300px;
-    padding: 30px ;
+    padding: 40px ;
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -22,4 +22,59 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.75);
+}
+
+#ExpenseModalButton{
+    width: 20px;
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+.modalcategory {
+    font-size: 24px;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+.modalcategory.food {
+    color: #ff6347;
+    /* Tomato */
+}
+
+.modalcategory.utilities {
+    color: #4682b4;
+    /* Steel Blue */
+}
+
+.modalcategory.entertainment {
+    color: #c03c52;
+}
+
+.modalcategory.unknown {
+    color: #808080;
+    /* Gray */
+}
+
+.ExpenseDetails{
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    opacity: 0.6;
+    line-height: 2px;
+}
+
+#time{
+    margin-top: 40px;
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+#modalPlant{
+    width: 220px;
+    height: auto;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
 }

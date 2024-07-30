@@ -1,0 +1,39 @@
+#dashboardData{
+    width: 50%;
+    height: 90vh;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-top: 40px;
+    padding-inline: 100px;
+}
+
+#dash{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#expenseDash{
+    width: 87%;
+    height: 40vh;
+    margin: 30px 0;
+    padding: 20px;
+    padding-bottom: 0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    /* border-bottom: none;
+    border-inline: none; */
+    /* border-right: none; */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#expenseTitle{
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-left: 10px;
+    margin-bottom: -10px;
+}

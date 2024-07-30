@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/Signup.css';
 
 const Signup = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        fullName: '',
+        username: '',
         email: '',
-        phoneNumber: '',
-        password: ''
+        password: '',
+        phoneNumber: ''
     });
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -23,37 +25,36 @@ const Signup = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         for (const key in formData) {
             if (formData[key].trim() === '') {
                 setError('All fields are required');
                 return;
             }
         }
-    
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             setError('Please enter a valid email address');
             return;
         }
-    
+
         try {
             const response = await axios.post('/api/v1/user/signup', formData);
             console.log(response.data);
-            // Handle the response data here
             if (response.status === 200) {
                 console.log('User registered successfully');
+                navigate('/login');
             } else {
                 setError(response.data.message || 'Failed to register. Please try again.');
                 console.error('Signup failed:', response.data.error);
             }
-            // Redirect user to dashboard or any other page upon successful signup
         } catch (error) {
             setError('Failed to register. Please try again.');
             console.error('Signup failed:', error);
         }
     };
-    
+
     return (
         <div className='auth'>
             <div className='container'>
@@ -62,10 +63,10 @@ const Signup = () => {
                 <form onSubmit={handleSubmit}>
                     <input
                         type='text'
-                        name='name'
-                        placeholder='Name'
+                        name='fullName'
+                        placeholder='Full Name'
                         className='user-field'
-                        value={formData.name}
+                        value={formData.fullName}
                         onChange={handleChange}
                     /><br />
                     <input
@@ -74,6 +75,14 @@ const Signup = () => {
                         placeholder='Email'
                         className='user-field'
                         value={formData.email}
+                        onChange={handleChange}
+                    /><br />
+                    <input
+                        type='text'
+                        name='username'
+                        placeholder='Username'
+                        className='user-field'
+                        value={formData.username}
                         onChange={handleChange}
                     /><br />
                     <input
