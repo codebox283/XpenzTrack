@@ -201,14 +201,7 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
     try {
         const getUserDetails = await User.aggregate([
             { $match: { _id: userId } },
-            {
-                $lookup: {
-                    from: 'categories',
-                    localField: '_id',
-                    foreignField: 'user',
-                    as: 'userCategories'
-                }
-            },
+            
             {
                 $lookup: {
                     from: 'expenses',
@@ -227,7 +220,6 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
             },
             {
                 $addFields: {
-                    categories: '$userCategories',
                     expenses: '$userExpenses',
                     savings: '$userSavings'
                 }
@@ -241,7 +233,6 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
                     phoneNumber: 1,
                     password: 1,
                     refreshToken: 1,
-                    categories: 1,
                     expenses: 1,
                     savings: 1
                 }

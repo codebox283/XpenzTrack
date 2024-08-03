@@ -31,10 +31,6 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Expense'
     }],
-    categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
-    }],
     savingsGoals: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SavingsGoal'

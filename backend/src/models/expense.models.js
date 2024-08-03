@@ -6,9 +6,10 @@ const expenseModel = new Schema({
         required: true
     },
     description: String,
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
+    category:{
+        type: String,
+        required: true,
+        enum: ["Food", "Utilities", "Entertainment", "Transportation", "Miscellaneous"]
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

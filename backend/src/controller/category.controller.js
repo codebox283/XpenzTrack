@@ -19,12 +19,12 @@ const setCategory = asyncHandler(async (req, res) => {
 
     if (!categoryArray.includes(name)) throw new ApiError(400, "Invalid category selected")
 
-    const category = new Category({
-        name,
-        user: userId
-    })
+    // const category = new Category({
+    //     name,
+    //     user: userId
+    // })
 
-    const cate = await category.save()
+    // const cate = await category.save()
 
     // console.log(cate);
 
@@ -32,7 +32,7 @@ const setCategory = asyncHandler(async (req, res) => {
     const expense = new Expense({
         amount,
         description,
-        category: cate._id,
+        category: name,
         user: userId
     })
 
@@ -41,7 +41,7 @@ const setCategory = asyncHandler(async (req, res) => {
 
     const user = await User.findByIdAndUpdate(
         userId,
-        { $push: { categories: cate._id, expenses: exp._id } },
+        { $push: { expenses: exp._id } },
         { new: true }
     )
 
