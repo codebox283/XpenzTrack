@@ -67,6 +67,29 @@
     opacity: 0.8;
 }
 
+#AddBtn{
+    width: fit-content;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    flex-wrap: wrap;
+    opacity: 0.6;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+#AddImg{
+    width: 15px;
+    margin-right: 5px;
+}
+
+#AddBtn p{
+    font-weight: 600;
+}
+
 .Expenses {
     width: 50%;
     height: 90vh;
@@ -75,6 +98,8 @@
     border-bottom-left-radius: 20px;
     padding-top: 40px;
     padding-inline: 100px;
+    display: flex;
+    flex-direction: column;
 }
 
 

@@ -1,0 +1,80 @@
+/* AddExpenseModal.css */
+.AddExpenseModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    outline: none;
+    width: 600px;
+    height: 400px; /* Adjust height if needed */
+    padding: 40px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modalTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modalInput {
+    margin-bottom: 20px;
+}
+
+.modalInput label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modalInput input,
+.modalInput select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modalButton {
+    padding: 10px 20px;
+    background-color: #4682b4; /* Steel Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modalButton:hover {
+    background-color: #5a9bd4; /* Lighter shade for hover effect */
+}
+
+.modalButton.cancel {
+    background-color: #c03c52; /* Red for cancel button */
+}
+
+.modalButton.cancel:hover {
+    background-color: #d2546e; /* Lighter shade for hover effect */
+}

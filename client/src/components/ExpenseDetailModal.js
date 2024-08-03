@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import CrossImg from '../assets/remove.png';
 import Plant from '../assets/plant2.png'
 import '../styles/RightPanel.css';
+import '../styles/ExpenseModal.css';
 
 const ExpenseDetailModal = ({ isOpen, onRequestClose, expense, data }) => {
 

@@ -3,25 +3,20 @@ import '../styles/Expenses.css';
 import 'simplebar-react/dist/simplebar.min.css'; // Import the CSS for simplebar
 import SimpleBar from 'simplebar-react';
 import Img from '../assets/man1.jpg';
+import AddImg from '../assets/plus.png';
 import RightPanel from '../components/RightPanel';
 import { Link } from 'react-router-dom';
 import ExpenseDetailModal from '../components/ExpenseDetailModal.js';
+import AddExpenseModal from '../components/AddExpenseModal'; // Import the AddExpenseModal
 import '../styles/ExpenseModal.css';
 import axios from 'axios';
 
 const Expenses = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [detailModalIsOpen, setdetailModalIsOpen] = useState(false);
+  // const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [data, setData] = useState(null); // Initialize state to null
-
-  // useEffect(() => {
-  //   fetch('/dummydata.json')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setData(data[0]);
-  //     })
-  //     .catch((error) => console.error('Error fetching data: ', error));
-  // }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  const [addExpenseModalIsOpen, setAddExpenseModalIsOpen] = useState(false); // State for Add Expense Modal
 
   useEffect(() => {
     axios.get('/api/v1/user/user-fulldetails')
@@ -45,12 +40,20 @@ const Expenses = () => {
 
   const handleCloseModal = () => {
     setSelectedExpense(null);
-    setModalIsOpen(false);
+    setdetailModalIsOpen(false);
   };
 
   const handleOpenModal = (expense) => {
     setSelectedExpense(expense);
-    setModalIsOpen(true);
+    setdetailModalIsOpen(true);
+  };
+
+  const handleCloseAddExpenseModal = () => {
+    setAddExpenseModalIsOpen(false);
+  };
+
+  const handleOpenAddExpenseModal = () => {
+    setAddExpenseModalIsOpen(true);
   };
 
   // Ensure data and expenses are available before calling groupExpensesByDate
@@ -66,7 +69,7 @@ const Expenses = () => {
             <p id='email'>{data.email}</p>
           </>
         ) : (
-          <p>Loading user info...</p>
+          <p>No goals to show</p>
         )}
         <ul>
           <Link className='Link' to="/dashboard"><li>Dashboard</li></Link>
@@ -81,6 +84,10 @@ const Expenses = () => {
       <div className='Expenses'>
         <h1 className='heading'>Expenses</h1>
         <p id='tag'>Last 7 days data</p>
+        <div id='AddBtn' onClick={handleOpenAddExpenseModal}>
+          <img id="AddImg" src={AddImg} alt=''></img>
+          <p>Add Expense</p>
+        </div>
         <SimpleBar className='DailyExpenses'>
           {Object.keys(expensesByDate).length > 0 ? (
             Object.keys(expensesByDate).map(date => (
@@ -103,17 +110,24 @@ const Expenses = () => {
               </div>
             ))
           ) : (
-            <p>Loading expenses...</p>
+            <p>No Record to show</p>
           )}
         </SimpleBar>
+        
         {selectedExpense && (
           <ExpenseDetailModal
             expense={selectedExpense}
             data={data} // Pass the data prop here
-            isOpen={modalIsOpen}
+            isOpen={detailModalIsOpen}
             onRequestClose={handleCloseModal}
           />
         )}
+
+        <AddExpenseModal
+          isOpen={addExpenseModalIsOpen}
+          onRequestClose={handleCloseAddExpenseModal}
+          categories={data ? data.categories : []} // Pass categories to AddExpenseModal
+        />
       </div>
 
       <RightPanel />
