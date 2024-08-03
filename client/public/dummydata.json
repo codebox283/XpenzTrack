@@ -46,7 +46,7 @@
                 "_id": "60d1e9c8c2d1c15d4c4ebbd4",
                 "amount": 50,
                 "description": "Groceries",
-                "category": "60d1e9c8c2d1c15d4c4ebbd2",
+                "category": "Food",
                 "user": "60d1e9c8c2d1c15d4c4ebbd1",
                 "createdAt": "2023-07-18T12:00:00.000Z",
                 "updatedAt": "2023-07-18T12:00:00.000Z",

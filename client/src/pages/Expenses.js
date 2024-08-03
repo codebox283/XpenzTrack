@@ -13,7 +13,6 @@ import axios from 'axios';
 
 const Expenses = () => {
   const [detailModalIsOpen, setdetailModalIsOpen] = useState(false);
-  // const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [data, setData] = useState(null); // Initialize state to null
   const [addExpenseModalIsOpen, setAddExpenseModalIsOpen] = useState(false); // State for Add Expense Modal
@@ -95,12 +94,12 @@ const Expenses = () => {
                 <h4 id='date'>{date}</h4>
                 <div id='border-top'>
                   {expensesByDate[date].map(expense => {
-                    const category = data.categories.find(cat => cat._id === expense.category);
+                    const category = expense.category; // Accessing category as a string now
                     const time = new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
                     return (
                       <div id='list-items' key={expense._id} onClick={() => handleOpenModal(expense)}>
-                        <p className={`category ${category ? category.name.toLowerCase() : 'unknown'}`} category >{category ? category.name : 'Unknown'} </p>
+                        <p className={`category ${category.toLowerCase()}`}>{category}</p> {/* Directly using category string */}
                         <p className='description'>{time}   •   {expense.description}</p>
                         <p className='amount'>- ${expense.amount}</p>
                       </div>

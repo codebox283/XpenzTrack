@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import Modal from 'react-modal'; // Make sure you have react-modal installed
-import '../styles/AddExpenseModal.css';
+import Modal from 'react-modal';
 import axios from 'axios';
 
-const AddExpenseModal = ({ isOpen, onRequestClose, categories }) => {
+const AddExpenseModal = ({ isOpen, onRequestClose }) => {
   const [expenseData, setExpenseData] = useState({
     description: '',
     amount: '',
-    name: '' // Change this to "name" to match the backend requirement
+    name: '' // Keep this to match the backend requirement
   });
+
+  const categories = ["Food", "Utilities", "Entertainment", "Transportation", "Miscellaneous"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,20 +23,25 @@ const AddExpenseModal = ({ isOpen, onRequestClose, categories }) => {
     e.preventDefault();
 
     try {
-      // Sending the request to /api/v1/setCategory
-      const response = await axios.post('/api/v1/category/setCategory', expenseData, {
+      // Sending the request to /api/v1/category/setCategory
+      const response = await axios.post('/api/v1/category/setCategory', {
+        amount: expenseData.amount,
+        name: expenseData.name, // This should match your category name
+        description: expenseData.description,
+      }, {
         withCredentials: true // Include credentials for cookie-based authentication
       });
 
       console.log(response.data); // Handle the response as needed
       onRequestClose(); // Close modal after submission
+      window.location.reload(); // Reload the page after successful submission
     } catch (error) {
-      console.error('Error adding expense:', error.response?.data || error.message); // Log error message
+      console.error('Error adding expense:', error.response?.data || error.message);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose} className="AddExpenseModal" overlayClassName="Overlay">
+    <Modal isOpen={isOpen} onRequestClose={onRequestClose} className="AddModal" overlayClassName="Overlay">
       <h2 className="modalTitle">Add Expense</h2>
       <form onSubmit={handleSubmit}>
         <div className="modalInput">
@@ -51,13 +57,13 @@ const AddExpenseModal = ({ isOpen, onRequestClose, categories }) => {
           <select name="name" value={expenseData.name} onChange={handleChange} required>
             <option value="">Select a category</option>
             {categories.map(category => (
-              <option key={category._id} value={category.name}>{category.name}</option> // Ensure this matches your category names
+              <option key={category} value={category}>{category}</option>
             ))}
           </select>
         </div>
         <div className="modalButtons">
           <button type="submit" className="modalButton">Add Expense</button>
-          <button type="button" className={`modalButton cancel`} onClick={onRequestClose}>Cancel</button>
+          <button type="button" className="modalButton cancel" onClick={onRequestClose}>Cancel</button>
         </div>
       </form>
     </Modal>

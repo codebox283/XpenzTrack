@@ -26,6 +26,7 @@ const GoalDetailModal = ({ isOpen, onRequestClose, goal }) => {
             <p className='GoalDetails'>Amount Saved: ${goal.currentBalance}</p>
             <p className='GoalDetails'>Target Amount: ${goal.targetAmount}</p>
             <p className='GoalDetails'>Target Date: {new Date(goal.targetDate).toLocaleDateString()}</p>
+            {/* <p className='GoalDetails'>Days Left: {goal.days}</p> */}
             {/* <button id='GoalModalButton' onClick={onRequestClose}>Close</button> */}
             <div id='GoalModalProgress'>
                 <CircularProgressbar

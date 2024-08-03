@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     const getExpenseChartData = () => {
         if (!expenseData) return null;
-
+    
         const categoryTotals = expenseData.reduce((totals, expense) => {
             const category = expense.category || 'unknown';
             if (!totals[category]) {
@@ -45,14 +45,10 @@ const Dashboard = () => {
             totals[category] += expense.amount;
             return totals;
         }, {});
-
-        const labels = Object.keys(categoryTotals).map(categoryId => {
-            // Assuming `data` has a `categories` array with id and name fields
-            const category = data.categories.find(cat => cat._id === categoryId);
-            return category ? category.name : 'Unknown';
-        });
+    
+        const labels = Object.keys(categoryTotals); // Get the unique categories directly
         const dataValues = Object.values(categoryTotals);
-
+    
         // Define specific colors for categories
         const colors = labels.map(label => {
             switch (label.toLowerCase()) {
@@ -61,13 +57,17 @@ const Dashboard = () => {
                 case 'utilities':
                     return '#4682b4'; // Steel Blue
                 case 'entertainment':
-                    return '#c03c52';
+                    return '#c03c52'; // Crimson
+                case 'transportation':
+                    return '#ffd700'; // Gold
+                case 'miscellaneous':
+                    return '#32cd32'; // Lime Green
                 case 'unknown':
                 default:
                     return '#808080'; // Gray
             }
         });
-
+    
         return {
             labels,
             datasets: [{
@@ -76,6 +76,7 @@ const Dashboard = () => {
             }],
         };
     };
+    
 
     const expenseChartData = getExpenseChartData();
 

@@ -11,12 +11,14 @@ import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import GoalDetailModal from '../components/GoalDetailModal.js';
+import AddGoalModal from '../components/AddGoalModal'; // Import the AddExpenseModal
 import '../styles/GoalModal.css'; // Import the styles for react-modal
 
 const Goals = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [data, setData] = useState(null); // Initialize state to null
+  const [addGoalModalIsOpen, setAddGoalModalIsOpen] = useState(false); // State for Add Expense Modal
 
   //  useEffect(() => {
   //   fetch('/dummydata.json')
@@ -45,6 +47,14 @@ const Goals = () => {
     setModalIsOpen(true);
   };
 
+  const handleCloseAddGoalModal = () => {
+    setAddGoalModalIsOpen(false);
+  };
+
+  const handleOpenAddGoalModal = () => {
+    setAddGoalModalIsOpen(true);
+  };
+
   return (
     <div className='Dashboard'>
       <div className='Navigation'>
@@ -71,13 +81,13 @@ const Goals = () => {
         <h1 className='heading'>Goals</h1>
         <p id='tag'>All your goals in one place</p>
 
-        <div id='AddBtn'>
+        <div id='AddBtn' onClick={handleOpenAddGoalModal}>
           <img id="AddImg" src={AddImg} alt=''></img>
           <p>Add Goal</p>
         </div>
         <SimpleBar className='DailyExpenses'>
-          {data && data.savings ? (
-            data.savings.map(goal => {
+          {data && data.savingsGoals ? (
+            data.savingsGoals.map(goal => {
               const percentage = (goal.currentBalance / goal.targetAmount) * 100;
               return (
                 <div key={goal._id} className="goal-item" onClick={() => handleOpenModal(goal)}>
@@ -113,6 +123,12 @@ const Goals = () => {
             onRequestClose={handleCloseModal}
           />
         )}
+
+        <AddGoalModal
+          isOpen={addGoalModalIsOpen}
+          onRequestClose={handleCloseAddGoalModal}
+          categories={data ? data.categories : []} // Pass categories to AddExpenseModal
+        />
       </div>
 
       <RightPanel />
