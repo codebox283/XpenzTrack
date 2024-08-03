@@ -1,4 +1,3 @@
-import { Category } from "../models/category.models.js";
 import { User } from "../models/user.models.js";
 import { Expense } from "../models/expense.models.js";
 import { ApiError } from "../utils/apiError.js";
@@ -18,15 +17,6 @@ const setCategory = asyncHandler(async (req, res) => {
     if(!name) throw new ApiError(401, "You must provide a name")
 
     if (!categoryArray.includes(name)) throw new ApiError(400, "Invalid category selected")
-
-    // const category = new Category({
-    //     name,
-    //     user: userId
-    // })
-
-    // const cate = await category.save()
-
-    // console.log(cate);
 
     // add expenses for category
     const expense = new Expense({
