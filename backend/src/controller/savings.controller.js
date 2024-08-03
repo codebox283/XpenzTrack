@@ -104,7 +104,7 @@ const EditGoal = asyncHandler(async (req, res) => {
             }
         );
 
-        if(!updatedGoal) {
+        if (!updatedGoal) {
             throw new ApiError(404, "Goal not found in editGoal");
         }
 
@@ -118,4 +118,41 @@ const EditGoal = asyncHandler(async (req, res) => {
     }
 })
 
-export { setGoal, EditGoal }
+const DeleteGoal = asyncHandler(async (req, res) => {
+    try {
+        const user = req.cookies?.ID;
+        console.log("deleteGoal user id: ", user);
+        if (!user) {
+            throw new ApiError(400, "User id is not valid in deleteGoal");
+        }
+        const goalId = req.params.id;
+        console.log("deleteGoal goal id: ", goalId);
+        if (!goalId) {
+            throw new ApiError(400, "Goal id is not valid in deleteGoal");
+        }
+
+        const deletedGoal = await SavingsGoal.findByIdAndDelete(goalId);
+        if (!deletedGoal) {
+            throw new ApiError(404, "Goal not found in deleteGoal");
+        }
+        const updatedUser = await User.findByIdAndUpdate(
+            new mongoose.Types.ObjectId(user),
+            {
+                $pull: { savingsGoals: goalId }
+            },
+            {
+                new: true
+            }
+        );
+
+        return res.status(200).json(
+            new ApiResponse(200, updatedUser, "Goal deleted successfully")
+        );
+        
+    } catch (error) {
+        console.log("Error in deleteGoal: " + error.message);
+        throw new ApiError(401, "An error occurred during deleteGoal");
+    }
+})
+
+export { setGoal, EditGoal, DeleteGoal}
