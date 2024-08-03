@@ -6,7 +6,7 @@ import SimpleBar from 'simplebar-react';
 import Img from '../assets/man1.jpg';
 import RightPanel from '../components/RightPanel';
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import GoalDetailModal from '../components/GoalDetailModal.js';
@@ -17,22 +17,22 @@ const Goals = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [data, setData] = useState(null); // Initialize state to null
 
-   useEffect(() => {
-    fetch('/dummydata.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data[0]);
-      })
-      .catch((error) => console.error('Error fetching data: ', error));
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
-
-  // useEffect(() => {
-  //   axios.get('/api/v1/user/user-fulldetails')
-  //     .then((response) => {
-  //       setData(response.data.data[0]);
+  //  useEffect(() => {
+  //   fetch('/dummydata.json')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setData(data[0]);
   //     })
   //     .catch((error) => console.error('Error fetching data: ', error));
   // }, []); // Empty dependency array means this useEffect runs once when the component mounts
+
+  useEffect(() => {
+    axios.get('/api/v1/user/user-fulldetails')
+      .then((response) => {
+        setData(response.data.data[0]);
+      })
+      .catch((error) => console.error('Error fetching data: ', error));
+  }, []); // Empty dependency array means this useEffect runs once when the component mounts
 
   const handleCloseModal = () => {
     setSelectedGoal(null);
