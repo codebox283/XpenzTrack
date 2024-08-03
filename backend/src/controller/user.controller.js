@@ -219,7 +219,7 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'savings',
+                    from: 'savingsgoals',
                     localField: '_id',
                     foreignField: 'user',
                     as: 'userSavings'
@@ -229,7 +229,7 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
                 $addFields: {
                     categories: '$userCategories',
                     expenses: '$userExpenses',
-                    savings: '$userSavings'
+                    savingsGoals: '$userSavings'
                 }
             },
             {
@@ -243,7 +243,7 @@ const getUsersWithDetails = asyncHandler(async (req, res) => {
                     refreshToken: 1,
                     categories: 1,
                     expenses: 1,
-                    savings: 1
+                    savingsGoals: 1
                 }
             }
         ]);
