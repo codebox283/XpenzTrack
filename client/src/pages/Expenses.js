@@ -17,6 +17,15 @@ const Expenses = () => {
   const [data, setData] = useState(null); // Initialize state to null
   const [addExpenseModalIsOpen, setAddExpenseModalIsOpen] = useState(false); // State for Add Expense Modal
 
+  // useEffect(() => {
+  //   fetch('/dummydata.json')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setData(data[0]);
+  //     })
+  //     .catch((error) => console.error('Error fetching data: ', error));
+  // }, []); // Empty dependency array means this useEffect runs once when the component mounts
+
   useEffect(() => {
     axios.get('/api/v1/user/user-fulldetails')
       .then((response) => {

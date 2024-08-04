@@ -1,0 +1,97 @@
+.Account {
+    background-color: #EDF0F6;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.ProfilePicture {
+    width: 40%;
+    height: 100%;
+    padding: 30px 20px;
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center; */
+    background-color: #ebe2e2;
+}
+
+.ProfilePicture img {
+    width: 70%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+
+.AccountDetails {
+    width: 60%;
+    height: 100%;
+    font-size: 15px;
+    padding: 0px 50px;
+    background-color: #E6E4D5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* text-align: center; */
+}
+
+.AccountDetails h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.AccountDetails p {
+    font-size: 20px;
+}
+
+.AccountDetails button {
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 12px;
+    background-color: #E5CAA2;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+    
+}
+
+.AccountDetails button:hover {
+    background-color: #a7dca7;
+}
+
+
+@media (max-width: 768px) {
+   
+    .ProfilePicture, .AccountDetails {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+    .ProfilePicture img {
+        width: 80%;
+    }
+}
+@media (max-width: 600px) {
+    .Account {
+        flex-direction: column;
+        height: auto;
+    }
+    .ProfilePicture, .AccountDetails {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+    .ProfilePicture img {
+        width: 80%;
+    }
+}
+
+
