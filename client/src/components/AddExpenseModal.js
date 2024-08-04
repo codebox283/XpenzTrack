@@ -23,13 +23,12 @@ const AddExpenseModal = ({ isOpen, onRequestClose }) => {
     e.preventDefault();
 
     try {
-      // Sending the request to /api/v1/category/setCategory
       const response = await axios.post('/api/v1/category/setCategory', {
         amount: expenseData.amount,
-        name: expenseData.name, // This should match your category name
+        name: expenseData.name, 
         description: expenseData.description,
       }, {
-        withCredentials: true // Include credentials for cookie-based authentication
+        withCredentials: true 
       });
 
       console.log(response.data); // Handle the response as needed

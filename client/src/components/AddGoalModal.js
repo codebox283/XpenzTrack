@@ -6,14 +6,14 @@ import '../styles/AddGoalModal.css';
 
 const AddGoalModal = ({ isOpen, onRequestClose }) => {
   const [goalData, setGoalData] = useState({
-    name: '',            // Changed to "name" to match the backend
-    targetAmount: '',    // Changed to "targetAmount" to match the backend
-    currentBalance: '',  // Added "currentBalance" field
-    targetDate: '',      // Added "targetDate" field
-    color: ''           // Added "color" field
+    name: '',
+    targetAmount: '',
+    currentBalance: '',
+    targetDate: '',
+    color: ''          
   });
 
-  const validColors = ['Red', 'Green', 'Yellow', 'Blue']; // Define valid colors
+  // const validColors = ['Red', 'Green', 'Yellow', 'Blue']; // Define valid colors
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,18 +29,18 @@ const AddGoalModal = ({ isOpen, onRequestClose }) => {
     try {
       // Sending the request to /api/v1/savings/set-goal
       const response = await axios.post('/api/v1/savings/set-goal', {
-        name: goalData.name,                  // Send name
-        targetAmount: goalData.targetAmount,  // Send target amount
-        currentBalance: goalData.currentBalance, // Send current balance
-        targetDate: goalData.targetDate,      // Send target date
-        color: 'Red',                // Send color
+        name: goalData.name,        
+        targetAmount: goalData.targetAmount,
+        currentBalance: goalData.currentBalance,
+        targetDate: goalData.targetDate,
+        color: 'Red',       
       }, {
-        withCredentials: true // Include credentials for cookie-based authentication
+        withCredentials: true 
       });
 
-      console.log(response.data); // Handle the response as needed
-      onRequestClose(); // Close modal after submission
-      window.location.reload(); // Reload the page after successful submission
+      console.log(response.data);
+      onRequestClose();
+      window.location.reload(); 
     } catch (error) {
       console.error('Error adding goal:', error.response?.data || error.message);
     }

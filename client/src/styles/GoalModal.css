@@ -25,11 +25,36 @@
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-#GoalDetailHeading{
+.GoalModalContent{
+    padding-left: 30px;
+    margin-top: -5px;
+}
+
+.Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#GoalDetailHeading {
     font-family: 'Poppins';
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 500;
     opacity: 0.8;
+    margin: 0;
+}
+
+#editbtn {
+    font-family: 'Poppins';
+    font-size: 12px;
+    margin-top: 12px;
+    margin-right: 200px; 
+    cursor: pointer;
+    color: #23539b;
+    background-color: white;
+    border: none;
 }
 
 .GoalDetails{
@@ -56,4 +81,48 @@
     height: 200px;
     align-self: flex-end;
     margin-top: 30px;
+}
+
+#deleteGoalBtn{
+    width: 80px;
+}
+
+.GoalEditForm{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.GoalEditForm label{
+    opacity: 0.6;
+}
+
+.editInputField{
+    width: 200px;
+    border: none;
+    border-inline: none;
+    margin-top: 14px;
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-weight: 500;
+    /* border-bottom: solid 1px rgb(60, 60, 60); */
+}
+#editSavebtn{
+    font-family: 'Poppins';
+    font-size: 12px; 
+    cursor: pointer;
+    color: #002357;
+    /* background-color: rgb(237, 226, 124); */
+    border: solid 1px rgb(128, 128, 128);
+    border-radius: 3px;
+    align-self: flex-start;
+    margin-top: 15px;
+    margin-bottom: -25px;
+    font-weight: 600;
+}
+
+#goaldeleteBtn{
+    margin-left: -90px;
 }

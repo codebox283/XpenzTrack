@@ -17,15 +17,6 @@ const Expenses = () => {
   const [data, setData] = useState(null); // Initialize state to null
   const [addExpenseModalIsOpen, setAddExpenseModalIsOpen] = useState(false); // State for Add Expense Modal
 
-  // useEffect(() => {
-  //   fetch('/dummydata.json')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setData(data[0]);
-  //     })
-  //     .catch((error) => console.error('Error fetching data: ', error));
-  // }, []); // Empty dependency array means this useEffect runs once when the component mounts
-
   useEffect(() => {
     axios.get('/api/v1/user/user-fulldetails')
       .then((response) => {
@@ -66,6 +57,7 @@ const Expenses = () => {
 
   // Ensure data and expenses are available before calling groupExpensesByDate
   const expensesByDate = data ? groupExpensesByDate(data.expenses) : {};
+  const sortedDates = Object.keys(expensesByDate).sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
 
   return (
     <div className='Dashboard'>
@@ -84,7 +76,7 @@ const Expenses = () => {
           <li id='this'>Expenses</li>
           <Link className='Link' to="/goals"><li>Goals</li></Link>
           <li>Summary</li>
-          <li>Account</li>
+          <Link className='Link' to="/account"><li>Account</li></Link>
           <li>Settings</li>
         </ul>
       </div>
@@ -97,8 +89,8 @@ const Expenses = () => {
           <p>Add Expense</p>
         </div>
         <SimpleBar className='DailyExpenses'>
-          {Object.keys(expensesByDate).length > 0 ? (
-            Object.keys(expensesByDate).map(date => (
+          {sortedDates.length > 0 ? (
+            sortedDates.map(date => (
               <div key={date}>
                 <h4 id='date'>{date}</h4>
                 <div id='border-top'>

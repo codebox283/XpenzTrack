@@ -97,7 +97,7 @@ const Dashboard = () => {
                     <Link className='Link' to="/expenses"><li>Expenses</li></Link>
                     <Link className='Link' to="/goals"><li>Goals</li></Link>
                     <li>Summary</li>
-                    <li>Account</li>
+                    <Link className='Link' to="/account"><li>Account</li></Link>
                     <li>Settings</li>
                 </ul>
             </div>

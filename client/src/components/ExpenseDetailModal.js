@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import axios from 'axios'; 
 import CrossImg from '../assets/remove.png';
 import Plant from '../assets/plant2.png';
 import '../styles/RightPanel.css';
@@ -8,25 +9,42 @@ import '../styles/ExpenseModal.css';
 const ExpenseDetailModal = ({ isOpen, onRequestClose, expense }) => {
     if (!isOpen || !expense) { return null; }
 
-    const category = expense.category || 'Unknown'; // Get category from expense object
+    const category = expense.category || 'Unknown';
     const date = new Date(expense.createdAt).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' });
     const time = new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const handleDelete = async () => {
+        try {
+            const response = await axios.get(`/api/v1/category/delete-expense/${expense._id}`);
+            
+            if (response.status === 200) {
+                onRequestClose(); 
+                window.location.reload(); 
+            }
+        } catch (error) {
+            console.error("error deleting expense: ", error);
+        }
+    };
+    
 
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             contentLabel="Expense Details"
-            ariaHideApp={false} // Needed for accessibility, but set to false for simplicity in this example
+            ariaHideApp={false}
             className="Modal"
             overlayClassName="Overlay"
         >
-            <img id='ExpenseModalButton' src={CrossImg} alt='Close' onClick={onRequestClose} />
-            <p className={`modalcategory ${category.toLowerCase()}`}>{category}</p> {/* Use category directly */}
-            <p className='ExpenseDetails'>{expense.description}</p>
-            <p className='ExpenseDetails'>${expense.amount}</p>
+            <div className="ModalContent">
+            <img id='ExpenseModalCloseButton' src={CrossImg} alt='Close' onClick={onRequestClose} />
+            <p className={`modalcategory ${category.toLowerCase()}`}>{category}</p>
+            <p className='ExpenseDetails' id='expesnsedesc'>{expense.description}</p>
+            <p className='ExpenseDetails' id='expenseamt'>${expense.amount}</p>
             <p className='ExpenseDetails' id='time'>{time} {date}</p>
             <img id="modalPlant" src={Plant} alt='' />
+            <button className='deleteBtn' onClick={handleDelete}>Delete Expense</button>
+            </div>
         </Modal>
     );
 };

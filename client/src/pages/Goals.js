@@ -72,7 +72,7 @@ const Goals = () => {
           <Link className='Link' to="/expenses"><li>Expenses</li></Link>
           <li id='this'>Goals</li>
           <li>Summary</li>
-          <li>Account</li>
+          <Link className='Link' to="/account"><li>Account</li></Link>
           <li>Settings</li>
         </ul>
       </div>
