@@ -1,75 +1,11 @@
-.auth {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(255, 248, 234);
+.text-1 a {
+    color: inherit;
+    text-decoration: none; 
 }
 
-.container {
-    height: fit-content;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 5px;
-    border-radius: 30px;
-    background-color: #ffffff;
-    font-family: 'Poppins';
-    text-align: center;
-    /* align-items: center; */
-}
-
-.header {
-    font-size: 30px;
-    justify-self: flex-start;
-}
-
-.header-text {
-    font-weight: 800px;
-    margin-bottom: 40px;
-    width: 60%;
-    align-self: center;
-    font-size: 16px;
-}
-
-.user-field {
-    margin: 10px;
-    padding: 10px 20px;
-    width: 70%;
-    border: solid 1px rgb(231, 231, 231);
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.submit-button {
-    margin-top: 30px;
-    padding: 10px 20px;
-    height: 40px;
-    width:80%;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: rgb(255, 191, 107);
-    border: none;       
-}
-
-.submit-button:hover {
-    color: #ffffff;
-    background-color: rgb(130, 82, 27);
-}
-.text-1{
-    font-weight: 500;
-    font-size: 16px;
-    text-align: right;
-    margin-right: 40px;
-}
-
-.text-2{
-    font-size: 12px;
-}
-
-.text-2 a{
-    font-size: 12px;
+.text-1 a:hover,
+.text-1 a:active {
+    color: inherit; 
     text-decoration: none;
-    color: black;
-    font-weight: 600;
+    border-bottom: 1px solid black;
 }

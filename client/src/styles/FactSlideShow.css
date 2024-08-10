@@ -1,0 +1,66 @@
+.FactSlideshow {
+    /* width: 90%; */
+    text-align: center;
+    background: linear-gradient(to right, #e0f7fa, #ffecb3); /* Gradient background */
+    /* border-radius: 10px;  */
+    padding: 20px; 
+    position: relative; /* Position relative for absolute positioning of heading */
+}
+
+.heading-wrapper {
+    position: absolute; 
+    left: 20vw; 
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#heading {
+    font-size: 35px;
+    font-weight: 400;
+}
+
+#facttag {
+    margin-top: -20px;
+}
+
+.Slide {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    height: 60vh;
+    margin-top: 140px;
+}
+
+.PieChart {
+    width: 300px;
+    margin-right: 200px; 
+}
+
+.FactText {
+    width: 300px; 
+    padding: 20px;
+    text-align: left; 
+}
+
+.Dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.Dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Dot.active {
+    transform: scale(1.2);
+    background-color: #6a777f;
+}

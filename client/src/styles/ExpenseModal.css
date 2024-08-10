@@ -3,14 +3,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border-radius: 50px;
     outline: none;
     width: 600px;
     height: 300px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 .Overlay {
@@ -22,12 +24,12 @@
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-.ModalContent{
+.ModalContent {
     padding-left: 50px;
     margin-top: -20px;
 }
 
-#ExpenseModalCloseButton{
+#ExpenseModalCloseButton {
     width: 20px;
     position: absolute;
     right: 40px;
@@ -42,13 +44,11 @@
 }
 
 .modalcategory.food {
-    color: #ff6347;
-    /* Tomato */
+    color: #ff6347; /* Tomato */
 }
 
 .modalcategory.utilities {
-    color: #4682b4;
-    /* Steel Blue */
+    color: #4682b4; /* Steel Blue */
 }
 
 .modalcategory.entertainment {
@@ -56,11 +56,10 @@
 }
 
 .modalcategory.unknown {
-    color: #808080;
-    /* Gray */
+    color: #808080; /* Gray */
 }
 
-.ExpenseDetails{
+.ExpenseDetails {
     font-family: 'Poppins';
     font-size: 16px;
     font-weight: 600;
@@ -68,21 +67,21 @@
     line-height: 2px;
 }
 
-#expenseamt{
+#expenseamt {
     padding-top: 10px;
 }
 
-#expesnsedesc{
+#expesnsedesc {
     margin-top: 0px;
 }
 
-#time{
+#time {
     margin-top: 40px;
     opacity: 0.5;
     font-size: 12px;
 }
 
-#modalPlant{
+#modalPlant {
     width: 220px;
     height: auto;
     position: absolute;
@@ -90,7 +89,7 @@
     bottom: 100px;
 }
 
-.deleteBtn{
+.deleteBtn {
     margin-top: 30px;
     width: fit-content;
     height: fit-content;
@@ -100,11 +99,9 @@
     color: white;
     font-family: 'Poppins';
     font-size: 12px;
-    cursor: pointer;
 }
 
-
-#deleteExpenseBtn:hover{
+#deleteExpenseBtn:hover {
     background-color: #276faa;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }

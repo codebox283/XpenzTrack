@@ -3,21 +3,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 226, 168);
+    background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+    animation: rotateGradient 10s ease infinite;
+    /* background-size: 400% 400%; */
+}
+
+@keyframes rotateGradient {
+    0% {
+        background-image: radial-gradient(circle at top, #d2974b, #eacda3);
+    }
+    25% {
+        background-image: radial-gradient(circle at right, #d2974b, #eacda3);
+    }
+    50% {
+        background-image: radial-gradient(circle at bottom, #d2974b, #eacda3);
+    }
+    75% {
+        background-image: radial-gradient(circle at left, #d2974b, #eacda3);
+    }
+    100% {
+        background-image: radial-gradient(circle at top, #d2974b, #eacda3);
+    }
 }
 
 .container {
     height: fit-content;
-    width: 400px;
+    width: 27vw;
     display: flex;
     flex-direction: column;
     padding: 40px 5px;
     border-radius: 30px;
-    background-color: rgb(255, 241, 216);
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur the background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
     font-family: 'Poppins';
     text-align: center;
-    /* align-items: center; */
 }
+
+
 
 .header {
     font-size: 30px;
@@ -56,6 +79,7 @@
 .submit-button:hover {
     color: #ffffff;
     background-color: rgb(172, 102, 10);
+    cursor: pointer;
 }
 .text-1{
     font-weight: 500;
@@ -77,4 +101,4 @@
 
 .error-message {
     color: rgb(228, 8, 8);
-  }
+}

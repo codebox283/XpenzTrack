@@ -1,30 +1,32 @@
-.Home{
+.Home {
     font-family: 'Poppins';
 }
 
 /* NAVBAR */
-.Navbar{
+.Navbar {
     display: flex;
     justify-content: space-between;
     padding: 0px 200px;
 }
 
-.NavLogo{
-    line-height: 27px;
-    font-size: 20px;
+.NavLogo {
+    width: 120px;
     margin-top: 10px;
 }
-
-.NavLogo h3{
-    font-size: 35px;
-    font-weight: bolder;
+.NavLogo img {
+    width: 100%;
+    transition: 0.5s;
+}
+.NavLogo img:hover{
+    transform: scale(1.1);
 }
 
-.NavbarButtons{
+.NavbarButtons {
     margin-top: 35px;
 }
 
-.btn1, .btn2{
+.btn1,
+.btn2 {
     background-color: rgba(51, 102, 255, 1);
     font-family: 'Poppins';
     color: white;
@@ -34,46 +36,57 @@
     font-weight: 300;
     width: 160px;
     height: 60px;
+    transition: 0.5s;
 }
 
-.btn1{
+.btn1 {
     color: black;
     background-color: white;
 }
 
-.btn1:hover{
+.btn1:hover {
     background-color: white;
     text-shadow: 1px 1px 2px rgb(120, 120, 120);
 }
 
-.btn2:hover{
+.btn2:hover {
     background-color: rgba(51, 102, 255, 0.9);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: scale(1.1);
 }
 
 /* HERO */
 
-.Hero{
+.Hero {
+    height: 78vh;
     display: flex;
     justify-content: space-between;
     padding: 100px 200px;
-    background-color: rgb(237, 233, 250);
+    /* background: linear-gradient(to right, #b7d5e4, #f2c6d4, #e0f2f1, #ffe0b2, #d0e6f4); */
+    background: linear-gradient(to right, #fefae0, #e6f9f2, #f9f0ff);
 }
 
-.HeroLeft{
+.HeroLeft {
     width: 470px;
     margin-top: -70px;
     text-align: start;
     color: #000000b1;
 }
 
-.HeroLeft h1{
+.HeroLeft h1 {
     font-size: 100px;
     font-weight: 500;
     line-height: 100px;
+    line-height: 110px;
 }
 
-.HeroLeft button{
-    background-color: rgba(248, 213, 126, 1);
+#cursor {
+    /* border-left: .02em solid; */
+    animation: blink .7s steps(1) infinite;
+}
+
+.HeroLeft button {
+    background-color: rgba(255, 230, 153, 1);
     border: none;
     border-radius: 10px;
     font-size: 24px;
@@ -81,14 +94,17 @@
     width: 200px;
     height: 80px;
     margin-top: 50px;
+    transition: 0.5s;
 }
 
-.HeroLeft button:hover{
-    color: white;
-    background-color: rgba(157, 129, 44, 0.7);
+.HeroLeft button:hover {
+    /* color: rgb(255, 255, 255);
+    background-color: rgb(255, 223, 144); */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: scale(1.1);
 }
 
-.HeroRight{
+.HeroRight {
     width: 600px;
     height: 600px;
     border-radius: 10px;
@@ -98,35 +114,45 @@
     text-align: center;
 }
 
-.HeroRight img{
+.HeroRight img {
     height: 100%;
+    transition: 0.5s;
+}
+
+.HeroRight img:hover {
+    transform: scale(1.2);
 }
 
 /* HERO */
 
-.Features{
+.Features {
     display: flex;
     padding: 100px 200px;
     justify-content: space-between;
 }
 
-.Features div{
+.Features div {
     font-size: 16px;
     width: 20%;
+    transition: 0.5s;
 }
 
-.Features div h2{
+.Features div:hover {
+    transform: scale(1.1);
+}
+
+.Features div h2 {
     font-weight: 600;
 }
 
-.Features div p{
+.Features div p {
     font-weight: 400;
 }
 
 
 /* Advert */
 
-.Advert{
+.Advert {
     height: 70vh;
     background-color: rgba(230, 248, 243, 1);
     display: flex;
@@ -135,14 +161,15 @@
     align-items: center;
 }
 
-.Advert h1{
+.Advert h1 {
     width: 45vw;
     font-size: 5vw;
     color: rgba(255, 255, 255, 1);
     z-index: 2;
+    text-align: center;
 }
 
-.Advert div{
+.Advert div {
     width: 45vw;
     height: 50vh;
     display: flex;
@@ -153,7 +180,7 @@
     z-index: 1;
 }
 
-.Advert div img{
+.Advert div img {
     width: 100%;
     object-fit: cover;
     opacity: 0.7;
@@ -161,60 +188,35 @@
 
 /* Testimonials */
 
-.Testimonials{
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(241, 236, 255, 1);
-}
-
-.Testimonials div{
-    padding: 4vw;
-}
-
-.TL img{
-    border-radius: 50%;
-}
-
-.TR{
-    width: 20%;
-    text-align: start;
-}
-
-.TR p:first-child{
-    font-weight: bold;
-}
-
-.TR p:last-child{
-    font-weight: 300;
-}
 
 
 /* CONTACT */
 
-.ContactSection{
+.ContactSection {
     display: flex;
     justify-content: space-between;
     padding: 100px 200px;
-    background-color: rgba(255, 246, 224, 1);
+    /* background-color: rgba(255, 246, 224, 1); */
+    background: linear-gradient(to top left, rgba(255, 246, 224, 1), rgba(255, 250, 210, 1), rgba(255, 235, 190, 1));
+
+
 }
 
-.ContactLeft{
+.ContactLeft {
     width: 470px;
     margin-top: -70px;
     text-align: start;
     color: #000000b1;
 }
 
-.ContactLeft h1{
+.ContactLeft h1 {
     font-size: 100px;
     font-weight: 500;
     line-height: 100px;
 }
 
-.ContactLeft button{
-    background-color: rgba(248, 213, 126, 1);
+.ContactLeft button {
+    background-color: rgba(255, 230, 153, 1);
     border: none;
     border-radius: 10px;
     font-size: 24px;
@@ -222,14 +224,17 @@
     width: 200px;
     height: 80px;
     margin-top: 50px;
+    transition: 0.5s;
 }
 
-.ContactLeft button:hover{
-    color: white;
-    background-color: rgba(157, 129, 44, 0.7);
+.ContactLeft button:hover {
+    /* color: rgb(255, 255, 255); */
+    /* background-color: rgb(255, 223, 144); */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: scale(1.1);
 }
 
-.ContactRight{
+.ContactRight {
     width: 600px;
     height: 600px;
     border-radius: 10px;
@@ -239,41 +244,59 @@
     text-align: center;
 }
 
-.ContactRight img{
+.ContactRight img {
     height: 100%;
+    transition: 0.5s;
 }
 
-.Footer{
+.ContactRight img:hover {
+    transform: scale(1.2);
+}
+
+.Footer {
     padding: 100px 200px;
 }
 
-.FootTop{
+.FootTop {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
 }
 
-.FTL{
+.FTL {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.Logo{
+.FTL img{
+    width: 100px;
+    transition: 0.5s;
+}
+.FTL img:hover{
+    transform: scale(1.1);
+}
+
+.Logo {
     font-size: 20px;
     line-height: 15px;
 }
 
-.Newsletter input{
+.Newsletter input {
     border: solid 1px rgba(208, 208, 208, 1);
     border-radius: 10px;
     padding: 12px 40px;
     width: 280px;
     font-size: 17px;
     font-family: 'Poppins';
+    transition: 0.5s;
 }
 
-.Newsletter button{
+.Newsletter input:hover{
+    transform: scale(1.1);
+}
+
+.Newsletter button {
     background-color: rgba(51, 102, 255, 1);
     font-family: 'Poppins';
     color: white;
@@ -284,44 +307,61 @@
     font-size: 17px;
     font-family: 'Poppins';
     width: 100px;
+    transition: 0.5s;
 }
 
-.Newsletter button:hover{
+.Newsletter button:hover {
     background-color: rgba(51, 102, 255, 0.9);
+    transform: scale(1.1);
 }
 
-.FTR{
+.FTR {
     display: flex;
 }
 
-.Links{
+.Links {
     list-style: none;
     line-height: 30px;
     text-align: start;
     padding-left: 100px;
 }
 
-.Links li:first-child{
-    font-weight: 600;
+.Links li{
+    transition: 0.5s;
+}
+.Links li:hover{
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
-.FootBot{
+.Links li:first-child {
+    font-weight: 600;
+    transform: none;
+    cursor: default;
+}
+
+.FootBot {
     display: flex;
     justify-content: space-between;
     padding-top: 80px;
 }
 
-.FootBot span{
+.FootBot span {
     display: flex;
 }
 
-.FootBot span p{
-    font-weight: 600;
+.FootBot span p {
+    font-weight: 500;
     font-size: 20px;
     padding-right: 20px;
 }
 
-.FootBot span img{
+.FootBot span img {
     width: 30px;
     padding-left: 20px;
+    transition: 0.5s;
+}
+.FootBot span img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }

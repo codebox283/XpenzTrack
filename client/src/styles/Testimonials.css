@@ -1,0 +1,40 @@
+.Testimonials {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: rgba(241, 236, 255, 1); */
+    padding-inline: 200px;
+}
+
+.Testimonials div {
+    padding: 4vw;
+}
+
+.TL {
+    flex: 1;
+    max-width: 200px;
+}
+
+.TL img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.TR {
+    flex: 2;
+    text-align: start;
+}
+
+.TR p:first-child {
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.TR p:last-child {
+    font-weight: 300;
+    margin-top: 10px;
+    color: #555;
+}

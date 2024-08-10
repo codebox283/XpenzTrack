@@ -1,63 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Expenses.css';
-import 'simplebar-react/dist/simplebar.min.css'; // Import the CSS for simplebar
+import 'simplebar-react/dist/simplebar.min.css';
 import SimpleBar from 'simplebar-react';
 import Img from '../assets/man1.jpg';
 import AddImg from '../assets/plus.png';
 import RightPanel from '../components/RightPanel';
 import { Link } from 'react-router-dom';
-import ExpenseDetailModal from '../components/ExpenseDetailModal.js';
-import AddExpenseModal from '../components/AddExpenseModal'; // Import the AddExpenseModal
+import ExpenseDetailModal from '../components/ExpenseDetailModal';
+import AddExpenseModal from '../components/AddExpenseModal';
 import '../styles/ExpenseModal.css';
 import axios from 'axios';
 
 const Expenses = () => {
-  const [detailModalIsOpen, setdetailModalIsOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
-  const [data, setData] = useState(null); // Initialize state to null
-  const [addExpenseModalIsOpen, setAddExpenseModalIsOpen] = useState(false); // State for Add Expense Modal
+  const [data, setData] = useState(null);
+  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
-    axios.get('/api/v1/user/user-fulldetails')
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/v1/user/user-fulldetails');
         setData(response.data.data[0]);
-      })
-      .catch((error) => console.error('Error fetching data: ', error));
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+        setError('Failed to fetch user details.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const groupExpensesByDate = (expenses) => {
     if (!expenses) return {};
     return expenses.reduce((acc, expense) => {
       const date = new Date(expense.createdAt).toDateString();
       if (!acc[date]) {
-        acc[date] = []; // For days with no track
+        acc[date] = [];
       }
       acc[date].push(expense);
       return acc;
     }, {});
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDetailModal = () => {
     setSelectedExpense(null);
-    setdetailModalIsOpen(false);
+    setIsDetailModalOpen(false);
   };
 
-  const handleOpenModal = (expense) => {
+  const handleOpenDetailModal = (expense) => {
     setSelectedExpense(expense);
-    setdetailModalIsOpen(true);
+    setIsDetailModalOpen(true);
   };
 
   const handleCloseAddExpenseModal = () => {
-    setAddExpenseModalIsOpen(false);
+    setIsAddExpenseModalOpen(false);
   };
 
   const handleOpenAddExpenseModal = () => {
-    setAddExpenseModalIsOpen(true);
+    setIsAddExpenseModalOpen(true);
   };
 
-  // Ensure data and expenses are available before calling groupExpensesByDate
   const expensesByDate = data ? groupExpensesByDate(data.expenses) : {};
-  const sortedDates = Object.keys(expensesByDate).sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
+  const sortedDates = Object.keys(expensesByDate).sort((a, b) => new Date(b) - new Date(a));
 
   return (
     <div className='Dashboard'>
@@ -85,24 +94,28 @@ const Expenses = () => {
         <h1 className='heading'>Expenses</h1>
         <p id='tag'>Last 7 days data</p>
         <div id='AddBtn' onClick={handleOpenAddExpenseModal}>
-          <img id="AddImg" src={AddImg} alt=''></img>
+          <img id="AddImg" src={AddImg} alt='Add expense' />
           <p>Add Expense</p>
         </div>
         <SimpleBar className='DailyExpenses'>
-          {sortedDates.length > 0 ? (
+          {loading ? (
+            <p>Loading...</p> // Loading state
+          ) : error ? (
+            <p>{error}</p> // Error message
+          ) : sortedDates.length > 0 ? (
             sortedDates.map(date => (
               <div key={date}>
                 <h4 id='date'>{date}</h4>
                 <div id='border-top'>
                   {expensesByDate[date].map(expense => {
-                    const category = expense.category; // Accessing category as a string now
-                    const time = new Date(expense.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    const { category, createdAt, description, amount, _id } = expense;
+                    const time = new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
                     return (
-                      <div id='list-items' key={expense._id} onClick={() => handleOpenModal(expense)}>
-                        <p className={`category ${category.toLowerCase()}`}>{category}</p> {/* Directly using category string */}
-                        <p className='description'>{time}   •   {expense.description}</p>
-                        <p className='amount'>- ${expense.amount}</p>
+                      <div id='list-items' key={_id} onClick={() => handleOpenDetailModal(expense)}>
+                        <p className={`category ${category.toLowerCase()}`}>{category}</p>
+                        <p className='description'>{time} • {description}</p>
+                        <p className='amount'>- ${amount}</p>
                       </div>
                     );
                   })}
@@ -110,23 +123,22 @@ const Expenses = () => {
               </div>
             ))
           ) : (
-            <p>No Record to show</p>
+            <p>No records to show</p>
           )}
         </SimpleBar>
-        
+
         {selectedExpense && (
           <ExpenseDetailModal
             expense={selectedExpense}
-            data={data} // Pass the data prop here
-            isOpen={detailModalIsOpen}
-            onRequestClose={handleCloseModal}
+            isOpen={isDetailModalOpen}
+            onRequestClose={handleCloseDetailModal}
           />
         )}
 
         <AddExpenseModal
-          isOpen={addExpenseModalIsOpen}
+          isOpen={isAddExpenseModalOpen}
           onRequestClose={handleCloseAddExpenseModal}
-          categories={data ? data.categories : []} // Pass categories to AddExpenseModal
+          categories={data ? data.categories : []}
         />
       </div>
 
