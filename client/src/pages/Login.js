@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/Login.css';
+import Navbar from '../components/Navbar';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -66,7 +67,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-//nakshatra@gmail.com
-//12345

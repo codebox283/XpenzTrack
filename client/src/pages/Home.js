@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
-import Logo from '../assets/expense..png'
+import Navbar from '../components/Navbar';
+import Logo from '../assets/logo.png'
 import Hero from '../assets/Hero.jpg';
-import Contact from '../assets/Contact.jpg';
 import Instagram from '../assets/instagram.svg';
 import LinkedIn from '../assets/linkedin-in.svg';
 import GitHub from "../assets/github.svg";
 import Testimonials from '../components/Testimonials';
 import FactSlideshow from '../components/FactSlideShow';
+import Contact from '../pages/Contact';
 
-const TYPING_SPEED = 150; 
-const DELETING_SPEED = 100; 
+const TYPING_SPEED = 150;
+const DELETING_SPEED = 100;
 
 class Typer extends React.Component {
   state = {
@@ -70,23 +71,16 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      <div className="Navbar">
-        <div className="NavLogo">
-          <img src={Logo} alt="Logo"/>
-        </div>
-        <div className='NavbarButtons'>
-          <Link to='/signup'><button className='btn1'>Sign Up</button></Link>
-          <Link to='/login'><button className='btn2'>Log In</button></Link>
-        </div>
-      </div>
+      
+      <Navbar></Navbar>
 
       <div className='Hero'>
         <div className='HeroLeft'>
-          <h1>EMPOWER YOUR <br/> 
+          <h1>EMPOWER YOUR <br />
             <Typer dataText={typingText} />
           </h1>
           <p>
-            Revolutionize Your Financial Journey, Redefine Your Success with 
+            Revolutionize Your Financial Journey, Redefine Your Success with
             <b> XPENZ TRACK</b>!&nbsp;
           </p>
           <Link to='/signup'><button>Get Started</button></Link>
@@ -118,16 +112,7 @@ const Home = () => {
       <FactSlideshow />
       <Testimonials />
 
-      <div className='ContactSection'>
-        <div className='ContactLeft'>
-          <h1>Let's Talk! <br /> WOOF!</h1>
-          <p>You can ask us questions about our app, and we will be happy to answer you!</p>
-          <button>Contact Us</button>
-        </div>
-        <div className='ContactRight'>
-          <img src={Contact} alt='' />
-        </div>
-      </div>
+      <Contact />
 
       <div className='Footer'>
         <div className="FootTop">
@@ -139,22 +124,22 @@ const Home = () => {
               <button>Send</button>
             </div>
           </div>
-          
+
           <div className='FTR'>
             <ul className='Links'>
               <li>Our Story</li>
               <li>FAQ</li>
-              <li>Contact</li>
+              <li><Link to='/contact'>Contact</Link></li>
             </ul>
             <ul className='Links'>
               <li>Services</li>
-              <li>Track Money</li>
-              <li>Save Money</li>
+              <li><Link to='/trackExpense'>Track Money</Link></li>
+              <li><Link to='/trackGoal'>Save Money</Link></li>
             </ul>
             <ul className='Links'>
               <li>Source</li>
               <li>GitHub</li>
-              <li>Team</li>
+              <li><Link to='/team'>Team</Link></li>
             </ul>
           </div>
         </div>

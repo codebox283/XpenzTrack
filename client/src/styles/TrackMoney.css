@@ -1,0 +1,65 @@
+.track-money {
+    background-image: url('../assets/download3.jpg'); /* Update the path as necessary */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.save-money {
+    background-image: url('../assets/download7.jpg'); /* Update the path as necessary */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.logo img{
+    width: 100px;
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.logo img:hover{
+    transform: scale(1.1);
+}
+
+.main-heading{
+    font-size: 40px;
+    font-weight: 400;
+    font-family: 'Poppins';
+    padding: 0px 50px ;
+}
+
+.description{
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Poppins';
+    padding: 50px;
+    width: 50%;
+}
+
+#saveD{
+    color: #fff;
+    width: 50%;
+}
+#saveH{
+    color: #fff;
+}
+
+.signup-button{
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Poppins';
+    margin-left: 50px;
+    padding:10px 15px;
+    width: 50%;
+    color: #000;
+    text-decoration: none;
+    background-color: #ffffff80;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+.signup-button:hover{
+    font-size: 18px;
+    font-weight: 400;
+}

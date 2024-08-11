@@ -3,57 +3,6 @@
 }
 
 /* NAVBAR */
-.Navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 200px;
-}
-
-.NavLogo {
-    width: 120px;
-    margin-top: 10px;
-}
-.NavLogo img {
-    width: 100%;
-    transition: 0.5s;
-}
-.NavLogo img:hover{
-    transform: scale(1.1);
-}
-
-.NavbarButtons {
-    margin-top: 35px;
-}
-
-.btn1,
-.btn2 {
-    background-color: rgba(51, 102, 255, 1);
-    font-family: 'Poppins';
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 24px;
-    font-weight: 300;
-    width: 160px;
-    height: 60px;
-    transition: 0.5s;
-}
-
-.btn1 {
-    color: black;
-    background-color: white;
-}
-
-.btn1:hover {
-    background-color: white;
-    text-shadow: 1px 1px 2px rgb(120, 120, 120);
-}
-
-.btn2:hover {
-    background-color: rgba(51, 102, 255, 0.9);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    transform: scale(1.1);
-}
 
 /* HERO */
 
@@ -326,10 +275,14 @@
     padding-left: 100px;
 }
 
-.Links li{
+.Links li {
     transition: 0.5s;
+    color: inherit; 
+    text-decoration: none; 
 }
-.Links li:hover{
+
+.Links li:hover,
+.Links li:active {
     transform: scale(1.2);
     cursor: pointer;
 }
@@ -339,6 +292,12 @@
     transform: none;
     cursor: default;
 }
+
+.Links li a {
+    color: inherit; 
+    text-decoration: none; 
+}
+
 
 .FootBot {
     display: flex;
