@@ -11,23 +11,14 @@ import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import GoalDetailModal from '../components/GoalDetailModal.js';
-import AddGoalModal from '../components/AddGoalModal'; // Import the AddExpenseModal
+import AddGoalModal from '../components/AddGoalModal'; // Import the AddGoalModal
 import '../styles/GoalModal.css'; // Import the styles for react-modal
 
 const Goals = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [data, setData] = useState(null); // Initialize state to null
-  const [addGoalModalIsOpen, setAddGoalModalIsOpen] = useState(false); // State for Add Expense Modal
-
-  //  useEffect(() => {
-  //   fetch('/dummydata.json')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setData(data[0]);
-  //     })
-  //     .catch((error) => console.error('Error fetching data: ', error));
-  // }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  const [addGoalModalIsOpen, setAddGoalModalIsOpen] = useState(false); // State for Add Goal Modal
 
   useEffect(() => {
     axios.get('/api/v1/user/user-fulldetails')
@@ -73,7 +64,6 @@ const Goals = () => {
           <li id='this'>Goals</li>
           <li>Summary</li>
           <Link className='Link' to="/account"><li>Account</li></Link>
-          <li>Settings</li>
         </ul>
       </div>
 
@@ -87,7 +77,8 @@ const Goals = () => {
         </div>
         <SimpleBar className='DailyExpenses'>
           {data && data.savingsGoals ? (
-            data.savingsGoals.map(goal => {
+            // Sort goals by createdAt in descending order
+            data.savingsGoals.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(goal => {
               const percentage = (goal.currentBalance / goal.targetAmount) * 100;
               return (
                 <div key={goal._id} className="goal-item" onClick={() => handleOpenModal(goal)}>
@@ -127,7 +118,7 @@ const Goals = () => {
         <AddGoalModal
           isOpen={addGoalModalIsOpen}
           onRequestClose={handleCloseAddGoalModal}
-          categories={data ? data.categories : []} // Pass categories to AddExpenseModal
+          categories={data ? data.categories : []} // Pass categories to AddGoalModal
         />
       </div>
 

@@ -2,9 +2,7 @@ import React from 'react';
 import '../styles/Team.css'; // Assuming you have a CSS file for styling
 import Github from'../assets/github.svg';
 import LinkedIn from '../assets/linkedin-in.svg';
-import { Link } from 'react-router-dom';
 import '../styles/TrackMoney.css';
-import Logo from '../assets/logo.png'
 
 const teamMembers = [
     {
@@ -36,10 +34,7 @@ const teamMembers = [
 const Team = () => {
     return (
         <div className="team-container">
-            {/* <Link to="/" className="logo">
-                    <img src={Logo} alt="Logo" />
-                </Link> */}
-            <h2 className="team-heading">Meet Our Team :</h2>
+            '<h2 className="team-heading">Meet Our Team :</h2>'
             <div className="team-members">
                 {teamMembers.map((member, index) => (
                     <div key={index} className="team-member">
