@@ -16,7 +16,7 @@ const Account = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await axios.get('/api/v1/user/user-fulldetails');
+                const response = await axios.get('https://expenztrack.onrender.com/api/v1/user/user-fulldetails');
                 setUser(response.data.data[0]);
                 setFormData({
                     fullName: response.data.data[0].fullName,

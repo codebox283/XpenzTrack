@@ -22,7 +22,7 @@ const Expenses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/v1/user/user-fulldetails');
+        const response = await axios.get('https://expenztrack.onrender.com/api/v1/user/user-fulldetails');
         setData(response.data.data[0]);
       } catch (error) {
         console.error('Error fetching data: ', error);

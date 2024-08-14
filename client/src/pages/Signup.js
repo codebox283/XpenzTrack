@@ -40,7 +40,7 @@ const Signup = () => {
         }
 
         try {
-            const response = await axios.post('/api/v1/user/signup', formData);
+            const response = await axios.post('https://expenztrack.onrender.com/api/v1/user/signup', formData);
             console.log(response.data);
             if (response.status === 200) {
                 console.log('User registered successfully');
