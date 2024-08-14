@@ -114,7 +114,7 @@ const Expenses = () => {
                     return (
                       <div id='list-items' key={_id} onClick={() => handleOpenDetailModal(expense)}>
                         <p className={`category ${category.toLowerCase()}`}>{category}</p>
-                        <p className='description'>{time} • {description}</p>
+                        <p className='desc'>{time} • {description}</p>
                         <p className='amount'>- ${amount}</p>
                       </div>
                     );

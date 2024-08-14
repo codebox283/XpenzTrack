@@ -1,7 +1,8 @@
 .team-container {
-    padding: 50px 100px;
-    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    padding: 5vh 100px;
+    background: linear-gradient(to left top, #4d5c69, #a6c8f0);
     height: 90vh;
+    /* max-height: fit-content; */
 }
 
 .team-heading {
@@ -14,8 +15,8 @@
 
 .team-members {
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
+    /* flex-direction: column; */
     width:100%;
     justify-content: center;
     margin-top: 100px;
@@ -28,7 +29,8 @@
 
 .team-member {
     font-family: 'Poppins';
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;

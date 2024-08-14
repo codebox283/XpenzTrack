@@ -27,7 +27,6 @@ const AddGoalModal = ({ isOpen, onRequestClose }) => {
     e.preventDefault();
 
     try {
-      // Sending the request to /api/v1/savings/set-goal
       const response = await axios.post('/api/v1/savings/set-goal', {
         name: goalData.name,        
         targetAmount: goalData.targetAmount,
