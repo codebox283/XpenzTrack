@@ -30,7 +30,7 @@ app.get('/', (req,res)=>{
 
 // Middleware
 app.use(cors({
-    origin: "https://expenztrack-frontend.onrender.com/" || "*",
+    origin: "https://expenztrack-frontend.onrender.com" || "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
