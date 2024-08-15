@@ -26,6 +26,15 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.static('public'));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+    res.cookie('sessionId', 'yourSessionIdHere', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // use secure cookies in production
+        sameSite: 'None', // allows cross-site cookies
+    });
+    next();
+});
+
 // Routes
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/category', categoryRoute);
