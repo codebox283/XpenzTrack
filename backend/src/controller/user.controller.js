@@ -82,6 +82,7 @@ const loginUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: 'None', // Allows the cookie to be sent in cross-site requests
+        maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
     };
 
     console.log("Login Details:", loggedInUser);
@@ -111,6 +112,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: 'None', // Allows the cookie to be sent in cross-site requests
+        maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
     };
 
     return res.status(200)
