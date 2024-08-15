@@ -80,7 +80,8 @@ const loginUser = asyncHandler(async (req, res) => {
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
     const option = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: 'None', // Allows the cookie to be sent in cross-site requests
     };
 
     console.log("Login Details:", loggedInUser);
@@ -109,6 +110,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     const option = {
         httpOnly: true,
         secure: true,
+        sameSite: 'None', // Allows the cookie to be sent in cross-site requests
     };
 
     return res.status(200)
