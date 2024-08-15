@@ -34,7 +34,8 @@ app.use(cors({
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
-    credentials: true
+    credentials: true,
+    sameSite: 'None',
 }));
 app.use(express.urlencoded({ extended: false, limit: "16kb" }));
 app.use(express.json({ limit: "16kb" }));
