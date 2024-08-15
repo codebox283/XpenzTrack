@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../styles/Account.css';
 import Img from '../assets/man1.jpg';
 import axios from "axios";
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const Account = () => {
     const [user, setUser] = useState(null);

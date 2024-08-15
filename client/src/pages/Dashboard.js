@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Doughnut, Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import '../styles/Dashboard.css';
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const Dashboard = () => {
     const [data, setData] = useState(null); // Initialize state to null

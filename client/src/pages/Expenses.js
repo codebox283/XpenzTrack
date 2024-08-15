@@ -10,6 +10,7 @@ import ExpenseDetailModal from '../components/ExpenseDetailModal';
 import AddExpenseModal from '../components/AddExpenseModal';
 import '../styles/ExpenseModal.css';
 import axios from 'axios';
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const Expenses = () => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);

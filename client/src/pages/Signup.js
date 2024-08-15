@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 import '../styles/Signup.css';
 

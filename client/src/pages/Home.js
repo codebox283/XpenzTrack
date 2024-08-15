@@ -10,6 +10,7 @@ import GitHub from "../assets/github.svg";
 import Testimonials from '../components/Testimonials';
 import FactSlideshow from '../components/FactSlideShow';
 import Contact from '../pages/Contact';
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const TYPING_SPEED = 150;
 const DELETING_SPEED = 100;

@@ -13,6 +13,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import GoalDetailModal from '../components/GoalDetailModal.js';
 import AddGoalModal from '../components/AddGoalModal'; // Import the AddGoalModal
 import '../styles/GoalModal.css'; // Import the styles for react-modal
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const Goals = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
