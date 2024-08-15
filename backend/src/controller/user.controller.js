@@ -268,4 +268,4 @@ export {
     logoutUser,
     updateProfileDetails,
     getUsersWithDetails,
-};
+}
