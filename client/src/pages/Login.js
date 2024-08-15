@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 import '../styles/Login.css';
 import Navbar from '../components/Navbar';
+
+// Set up axios to send cookies with requests
+axios.defaults.withCredentials = true; // Allows cookies to be sent with requests
 
 const Login = () => {
     const [formData, setFormData] = useState({
