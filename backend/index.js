@@ -4,8 +4,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { connectDB } from './src/db/index.js';
 import userRoute from './src/routes/user.routes.js';
-import categoryRoute from './src/routes/category.routes.js'
-import savingsRoute from './src/routes/savings.routes.js'
+import categoryRoute from './src/routes/category.routes.js';
+import savingsRoute from './src/routes/savings.routes.js';
 
 dotenv.config({
     path: "./src/.env"
@@ -13,24 +13,9 @@ dotenv.config({
 
 const app = express();
 
-// Connect to MongoDB
-connectDB()
-    .then(() => {
-        app.listen(process.env.PORT || 5500, () => {
-            console.log(`Server connected at port ${process.env.PORT || 5500}`);
-        });
-    })
-    .catch((error) => {
-        console.log('MongoDB connection failed: ', error);
-    });
-
-app.get('/', (req,res)=>{
-    res.send('ExpenZ Track Backend');
-})
-
 // Middleware
 app.use(cors({
-    origin: "https://expenztrack-frontend.onrender.com" || "*",
+    origin: "https://expenztrack-frontend.onrender.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
@@ -45,5 +30,21 @@ app.use(cookieParser());
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/savings', savingsRoute);
+
+// Catch-all route for SPA
+app.get('*', (req, res) => {
+    res.sendFile('index.html', { root: 'public' }); // Ensure 'public' contains your 'index.html'
+});
+
+// Connect to MongoDB and start server
+connectDB()
+    .then(() => {
+        app.listen(process.env.PORT || 5500, () => {
+            console.log(`Server connected at port ${process.env.PORT || 5500}`);
+        });
+    })
+    .catch((error) => {
+        console.log('MongoDB connection failed: ', error);
+    });
 
 export { app };
