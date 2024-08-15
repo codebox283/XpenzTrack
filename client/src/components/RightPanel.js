@@ -10,7 +10,7 @@ const RightPanel = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get('/api/v1/user/user-fulldetails');
+        const response = await axios.get('https://expenztrack.onrender.com/api/v1/user/user-fulldetails');
         const fetchedExpenses = response.data.data[0]?.expenses || [];
 
         // Extract unique categories from expenses
