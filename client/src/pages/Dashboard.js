@@ -14,7 +14,7 @@ const Dashboard = () => {
     // const [goalData, setGoalData] = useState(null); // State for goal data
 
     useEffect(() => {
-        axios.get('https://expenztrack.onrender.com/api/v1/user/user-fulldetails')
+        axios.get('/api/v1/user/user-fulldetails')
             .then((response) => {
                 const userData = response.data.data[0];
                 setData(userData);

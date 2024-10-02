@@ -22,7 +22,7 @@ const Goals = () => {
   const [addGoalModalIsOpen, setAddGoalModalIsOpen] = useState(false); // State for Add Goal Modal
 
   useEffect(() => {
-    axios.get('https://expenztrack.onrender.com/api/v1/user/user-fulldetails')
+    axios.get('/api/v1/user/user-fulldetails')
       .then((response) => {
         setData(response.data.data[0]);
       })

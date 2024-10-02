@@ -27,7 +27,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('https://expenztrack.onrender.com/api/v1/user/login', formData);
+            const response = await axios.post('/api/v1/user/login', formData);
             console.log(response.data);
             navigate('/dashboard');
             // Redirect user to dashboard or any other page upon successful login
